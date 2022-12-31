@@ -1,6 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Space+Grotesk&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  /* background-color: black; */
+  line-height: 1.6;
+  color: hsla(0, 0%, 100%, 0.7);
+  color: #b3b3b3;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+}
+
+/*
 
 :root {
   --max-width: 1100px;
@@ -108,4 +123,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */

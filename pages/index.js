@@ -8,15 +8,12 @@ export default function Home() {
         <meta name="description" content="Spotify Build created by @danztee" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/bootstrap-icons.svg" />
       </Head>
 
-      <h1>this is a spotify build</h1>
-      <main>
-        {/* sidebar */}
-        {/* center */}
-      </main>
-
-      <footer>{/* player */}</footer>
+      <section className="flex flex-grow">
+        <h1>home page</h1>
+      </section>
     </>
   );
 }
