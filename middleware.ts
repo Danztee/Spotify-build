@@ -7,6 +7,10 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
   const { pathname } = request.nextUrl;
 
+  if (token === null || undefined) {
+    return NextResponse.rewrite(new URL("/login", request.url));
+  }
+
   if (!token && pathname !== "/login") {
     return NextResponse.rewrite(new URL("/login", request.url));
   }
@@ -17,5 +21,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login/", "/api/auth", "/"],
+  matcher: ["/login", "/api/auth", "/", "/playlist/:path*", "/search"],
 };

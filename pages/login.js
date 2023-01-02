@@ -1,16 +1,18 @@
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import spotifyImage from "../public/spotify.jpeg";
+import spotifyImage from "../public/spotify.png";
 
 const Login = ({ providers }) => {
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <div className="flex flex-col items-center bg-black min-h-screen w-full justify-center gap-10">
       <Image src={spotifyImage} width="300" alt="spotify-img" />
       {Object.values(providers).map((provider, index) => (
         <div key={index}>
           <button
-            className="bg-[#18D860] text-white p-5 rounded-lg"
+            className="btn mt-5 btn-secondary"
             onClick={() => {
               signIn(provider.id, { callbackUrl: "/" });
             }}

@@ -1,0 +1,48 @@
+#header {
+  position: relative;
+  height: 50px;
+}
+
+#bottom {
+  position: fixed;
+  display: flex;
+  width: -webkit-fill-available;
+  justify-content: space-between;
+}
+
+#buttonContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  button {
+    padding: 3px;
+    background-color: black;
+    color: #fff;
+    border-radius: 100%;
+    outline: none;
+    border: none;
+  }
+}
+
+#usernameContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: #000;
+  font-weight: bold;
+  padding: 3px;
+  cursor: pointer;
+  opacity: 90%;
+  border-radius: 100px;
+  padding-right: 5px;
+  margin-right: 2rem;
+
+  &:hover {
+    opacity: 80%;
+  }
+
+  img {
+    border-radius: 100%;
+  }
+}

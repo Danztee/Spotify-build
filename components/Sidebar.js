@@ -3,21 +3,50 @@ import SidebarSVG from "./SidebarSVG";
 
 import classes from "../styles/Sidebar.module.scss";
 import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import useSpotify from "../hooks/useSpotify";
+
+import { useSelector, useDispatch } from "react-redux";
+import { addPlaylistId } from "../slices/playlistIdSlice";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
+  const spotifyApi = useSpotify();
   const { data: session } = useSession();
+  let user = session?.user.username;
+  const [playlists, setPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getUserPlaylists().then((data) => {
+        setPlaylists(data.body.items);
+      });
+    }
+  }, [session, spotifyApi]);
+
+  const dispatch = useDispatch();
+
+  const playlistHandler = (id) => {
+    dispatch(addPlaylistId(id));
+  };
 
   return (
     <aside
       id={classes.sidebar}
-      className="overflow-y-scroll h-screen scrollbar-hide"
+      className="overflow-y-scroll h-screen scrollbar-hide d-none d-lg-flex"
     >
-      <div>
-        <Link href="/">
+      <div id="spotify-logo">
+        <Link href="/" className={classes.sidebarLink}>
           <svg
             viewBox="0 0 1134 340"
-            className="text-white h-[40px]"
-            style={{ width: "100%", maxWidth: "131px" }}
+            style={{
+              width: "100%",
+              maxWidth: "131px",
+              height: "40px",
+              color: "white",
+            }}
           >
             <path
               fill="currentColor"
@@ -27,12 +56,9 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <ul className="list-none">
+      <ul className="first-part">
         <li>
-          <Link
-            href="/"
-            className="flex items-center space-x-4 hover:text-white"
-          >
+          <Link href="/" className={classes.sidebarLink}>
             <SidebarSVG
               height="24"
               width="24"
@@ -40,15 +66,12 @@ const Sidebar = () => {
               className="home-active-icon"
               d="M13.5 1.515a3 3 0 00-3 0L3 5.845a2 2 0 00-1 1.732V21a1 1 0 001 1h6a1 1 0 001-1v-6h4v6a1 1 0 001 1h6a1 1 0 001-1V7.577a2 2 0 00-1-1.732l-7.5-4.33z"
             />
-            <p>Home</p>
+            <span>Home</span>
           </Link>
         </li>
 
         <li>
-          <Link
-            href="/"
-            className="flex items-center space-x-4 hover:text-white"
-          >
+          <Link href="/search" className={classes.sidebarLink}>
             <SidebarSVG
               height="24"
               width="24"
@@ -56,15 +79,12 @@ const Sidebar = () => {
               className="search-icon"
               d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 101.414-1.414l-4.344-4.344a9.157 9.157 0 002.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z"
             />
-            <p>Search</p>
+            <span>Search</span>
           </Link>
         </li>
 
         <li>
-          <Link
-            href="/"
-            className="flex items-center space-x-4 hover:text-white"
-          >
+          <Link href="/" className={classes.sidebarLink}>
             <SidebarSVG
               height="24"
               width="24"
@@ -72,17 +92,14 @@ const Sidebar = () => {
               className="collection-icon"
               d="M14.5 2.134a1 1 0 011 0l6 3.464a1 1 0 01.5.866V21a1 1 0 01-1 1h-6a1 1 0 01-1-1V3a1 1 0 01.5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1zm6 0a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1z"
             />
-            <p>Your Library</p>
+            <span>Your Library</span>
           </Link>
         </li>
       </ul>
 
-      <ul className="list-none">
+      <ul className="second-part">
         <li>
-          <Link
-            href="/"
-            className="flex items-center space-x-4 hover:text-white"
-          >
+          <Link href="/" className={classes.sidebarLink}>
             <SidebarSVG
               height="20"
               width="20"
@@ -90,15 +107,12 @@ const Sidebar = () => {
               className="bi bi-plus-square-fill"
               d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"
             />
-            <p>Create Playlist</p>
+            <span>Create Playlist</span>
           </Link>
         </li>
 
         <li>
-          <Link
-            href="/"
-            className="flex items-center space-x-4 hover:text-white"
-          >
+          <Link href="/" className={classes.sidebarLink}>
             <SidebarSVG
               height="20"
               width="20"
@@ -106,7 +120,7 @@ const Sidebar = () => {
               className=""
               d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"
             />
-            <p>Liked Songs</p>
+            <span>Liked Songs</span>
           </Link>
         </li>
       </ul>
@@ -115,84 +129,35 @@ const Sidebar = () => {
 
       <div className={classes.container}>
         {/* playlist */}
-        <ul>
-          <li>playlist name</li>
-          <li>playlist name</li>
-          <li>playlist name</li>
+        <ul style={{ marginTop: "-1rem" }}>
+          {playlists.map((playlist, index) => {
+            return (
+              <li key={index}>
+                <Link
+                  href={`/playlist/${playlist.id}`}
+                  className={classes.sidebarLink}
+                  onClick={() => playlistHandler(playlist.id)}
+                >
+                  {playlist.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
-        <ul className={classes.user}>
-          <p>iamdanztee</p>
-          <p>install app</p>
-        </ul>
+        <Link href="/" className={classes.sidebarLink}>
+          <SidebarSVG
+            height="24"
+            width="24"
+            view="24"
+            className=""
+            d="M12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24ZM2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12ZM16.2929 11.2929L13 14.5858V6H11V14.5858L7.70711 11.2929L6.29289 12.7071L11.2929 17.7071L12 18.4142L12.7071 17.7071L17.7071 12.7071L16.2929 11.2929Z"
+          />
+          <p>Install app</p>
+        </Link>
       </div>
     </aside>
   );
 };
 
 export default Sidebar;
-
-// home icon
-<svg
-  role="img"
-  height="24"
-  width="24"
-  aria-hidden="true"
-  class="Svg-sc-ytk21e-0 uPxdw home-active-icon"
-  viewBox="0 0 24 24"
-  data-encore-id="icon"
->
-  <path d="M13.5 1.515a3 3 0 00-3 0L3 5.845a2 2 0 00-1 1.732V21a1 1 0 001 1h6a1 1 0 001-1v-6h4v6a1 1 0 001 1h6a1 1 0 001-1V7.577a2 2 0 00-1-1.732l-7.5-4.33z"></path>
-</svg>;
-
-// search
-<svg
-  role="img"
-  height="24"
-  width="24"
-  aria-hidden="true"
-  class="Svg-sc-ytk21e-0 uPxdw search-icon"
-  viewBox="0 0 24 24"
-  data-encore-id="icon"
->
-  <path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 101.414-1.414l-4.344-4.344a9.157 9.157 0 002.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z"></path>
-</svg>;
-
-// collection
-<svg
-  role="img"
-  height="24"
-  width="24"
-  aria-hidden="true"
-  class="Svg-sc-ytk21e-0 uPxdw search-icon"
-  viewBox="0 0 24 24"
-  data-encore-id="icon"
->
-  <path d="M14.5 2.134a1 1 0 011 0l6 3.464a1 1 0 01.5.866V21a1 1 0 01-1 1h-6a1 1 0 01-1-1V3a1 1 0 01.5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1zm6 0a1 1 0 01-1-1V3a1 1 0 012 0v18a1 1 0 01-1 1z"></path>
-</svg>;
-
-// add playlist
-<svg
-  role="img"
-  height="12"
-  width="12"
-  aria-hidden="true"
-  viewBox="0 0 16 16"
-  data-encore-id="icon"
-  class="Svg-sc-ytk21e-0 uPxdw"
->
-  <path d="M15.25 8a.75.75 0 01-.75.75H8.75v5.75a.75.75 0 01-1.5 0V8.75H1.5a.75.75 0 010-1.5h5.75V1.5a.75.75 0 011.5 0v5.75h5.75a.75.75 0 01.75.75z"></path>
-</svg>;
-
-// liked song
-<svg
-  role="img"
-  height="12"
-  width="12"
-  aria-hidden="true"
-  viewBox="0 0 16 16"
-  data-encore-id="icon"
-  class="Svg-sc-ytk21e-0 uPxdw"
->
-  <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
-</svg>;

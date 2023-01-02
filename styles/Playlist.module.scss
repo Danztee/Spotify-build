@@ -1,0 +1,20 @@
+.playlist {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  width: inherit;
+
+  .head {
+    display: flex;
+
+    align-items: center;
+    gap: 2rem;
+    color: #fff;
+    width: inherit;
+
+    h1 {
+      font-size: 5rem;
+    }
+  }
+}

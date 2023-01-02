@@ -1,4 +1,7 @@
+import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
+import classes from "../styles/Home.module.scss";
 
 export default function Home() {
   return (
@@ -8,12 +11,18 @@ export default function Home() {
         <meta name="description" content="Spotify Build created by @danztee" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/bootstrap-icons.svg" />
       </Head>
 
-      <section className="flex flex-grow">
-        <h1>home page</h1>
-      </section>
+      <section className={classes.home}></section>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  return {
+    props: {
+      session,
+    },
+  };
 }

@@ -1,0 +1,43 @@
+.play {
+  background: #1ed760;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 50%;
+  color: #000;
+
+  &:hover {
+    padding: 1.05rem;
+  }
+}
+
+.playMore {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.more:hover {
+  color: #fff;
+}
+
+.songsContainer {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 7rem;
+}
+
+#songsHeader {
+  padding: 1rem 0;
+  gap: 2rem;
+
+  display: grid;
+  grid-template-columns: 5px 3.5fr auto;
+
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 5px 3.5fr 2fr 2fr 1fr;
+  }
+}
