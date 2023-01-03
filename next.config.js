@@ -5,6 +5,10 @@ const nextConfig = {
   images: {
     domains: ["i.scdn.co", "mosaic.scdn.co"],
   },
+
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

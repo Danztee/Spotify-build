@@ -11,19 +11,19 @@ function Layout({ children }) {
   const { pathname } = router;
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
-  let back = "";
-  {
-    back =
-      pathname === "/playlist/[playlistId]"
-        ? `linear-gradient(180deg, ${backgroundColor}, black 70%)`
-        : "rgb(56, 72, 48, 0.4)";
-  }
-
   return (
     <>
       <div className="w-100" id="spotify">
         {pathname !== "/login" && <Sidebar />}
-        <main style={{ background: session && back }}>{children}</main>
+        <main
+          style={{
+            background:
+              session &&
+              `linear-gradient(180deg, ${backgroundColor}, #121212 70%)`,
+          }}
+        >
+          {children}
+        </main>
         <footer>{}</footer>
       </div>
     </>

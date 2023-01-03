@@ -35,9 +35,9 @@ const Sidebar = () => {
   return (
     <aside
       id={classes.sidebar}
-      className="overflow-y-scroll h-screen scrollbar-hide d-none d-lg-flex"
+      className="overflow-y-scroll h-screen scrollbar-hide"
     >
-      <div id="spotify-logo">
+      <div id="spotify-logo" className="d-none d-lg-block">
         <Link href="/" className={classes.sidebarLink}>
           <svg
             viewBox="0 0 1134 340"
@@ -56,7 +56,7 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <ul className="first-part">
+      <ul className="d-flex" id={classes.firstPart}>
         <li>
           <Link href="/" className={classes.sidebarLink}>
             <SidebarSVG
@@ -97,7 +97,7 @@ const Sidebar = () => {
         </li>
       </ul>
 
-      <ul className="second-part">
+      <ul className="second-part d-none d-lg-flex">
         <li>
           <Link href="/" className={classes.sidebarLink}>
             <SidebarSVG
@@ -127,7 +127,7 @@ const Sidebar = () => {
 
       <hr />
 
-      <div className={classes.container}>
+      <div id={classes.container} className="d-none d-lg-flex">
         {/* playlist */}
         <ul style={{ marginTop: "-1rem" }}>
           {playlists.map((playlist, index) => {

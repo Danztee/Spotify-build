@@ -16,3 +16,5 @@ export const backgroundSlice = createSlice({
 
 export const { changeBackground } = backgroundSlice.actions;
 export default backgroundSlice.reducer;
+
+// rgb(154,144,117)

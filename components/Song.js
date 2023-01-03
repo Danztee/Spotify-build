@@ -48,7 +48,7 @@ const Song = ({ order, track }) => {
 
         <p>
           <span>{track?.track.name}</span> <br />
-          {track.track.artists.map((artiste, index) => {
+          {track.track.artists.map((artiste) => {
             return (
               <span key={artiste.id} className="artiste-item">
                 {artiste.name}

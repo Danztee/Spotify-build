@@ -8,12 +8,15 @@ import useSpotify from "../../hooks/useSpotify";
 import classes from "../../styles/Playlist.module.scss";
 import { addPlaylist } from "../../slices/playlistSlice";
 
+// let img = "";
 const Playlist = () => {
   const dispatch = useDispatch();
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
+
   const spotifyApi = useSpotify();
   const playlistId = useSelector((state) => state.playlistId.value);
   const playlist = useSelector((state) => state.playlist.value);
+  const [imgURL, setImgURL] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,6 +29,10 @@ const Playlist = () => {
     }
     fetchData();
   }, [spotifyApi, playlistId, dispatch]);
+
+  // if (playlist.length === undefined) {
+  //   img = playlist.images[0].url;
+  // }
 
   useBackgroundPicker(playlist.images?.[0].url);
 

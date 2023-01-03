@@ -4,9 +4,12 @@ import Image from "next/image";
 import classes from "../styles/Home.module.scss";
 
 import { useSession, signOut } from "next-auth/react";
+import SearchBar from "./SearchBar";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   let newName = "";
   if (session?.user.name.length > 11) {
@@ -17,24 +20,28 @@ const Header = () => {
     <header id={classes.header}>
       <div id={classes.bottom}>
         <div id={classes.buttonContainer}>
-          <button className={classes.btn}>
-            <SidebarSVG
-              height="24"
-              width="24"
-              view="24"
-              className="back"
-              d="M15.957 2.793a1 1 0 010 1.414L8.164 12l7.793 7.793a1 1 0 11-1.414 1.414L5.336 12l9.207-9.207a1 1 0 011.414 0z"
-            />
-          </button>
-          <button className={classes.btn}>
-            <SidebarSVG
-              height="24"
-              width="24"
-              view="24"
-              className="front"
-              d="M8.043 2.793a1 1 0 000 1.414L15.836 12l-7.793 7.793a1 1 0 101.414 1.414L18.664 12 9.457 2.793a1 1 0 00-1.414 0z"
-            />
-          </button>
+          <div className="d-none d-lg-flex gap-3">
+            <button className={classes.btn}>
+              <SidebarSVG
+                height="24"
+                width="24"
+                view="24"
+                className="back"
+                d="M15.957 2.793a1 1 0 010 1.414L8.164 12l7.793 7.793a1 1 0 11-1.414 1.414L5.336 12l9.207-9.207a1 1 0 011.414 0z"
+              />
+            </button>
+            <button className={classes.btn}>
+              <SidebarSVG
+                height="24"
+                width="24"
+                view="24"
+                className="front"
+                d="M8.043 2.793a1 1 0 000 1.414L15.836 12l-7.793 7.793a1 1 0 101.414 1.414L18.664 12 9.457 2.793a1 1 0 00-1.414 0z"
+              />
+            </button>
+          </div>
+
+          {router.pathname === "/search" && <SearchBar />}
         </div>
 
         <div
@@ -51,7 +58,7 @@ const Header = () => {
               height="30"
             />
           )}
-          <p className="text-white">{newName}</p>
+          <p className="text-white d-none d-lg-block">{newName}</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

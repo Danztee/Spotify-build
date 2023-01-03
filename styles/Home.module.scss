@@ -1,6 +1,6 @@
 #header {
   position: relative;
-  height: 50px;
+  height: 70px;
 }
 
 #bottom {
@@ -8,12 +8,23 @@
   display: flex;
   width: -webkit-fill-available;
   justify-content: space-between;
+
+  background: transparent;
+  padding: 1rem 0;
+  top: 0;
+  left: 0;
+  backdrop-filter: brightness(0.5);
+
+  @media screen and (min-width: 992px) {
+    left: 17.67%;
+  }
 }
 
 #buttonContainer {
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding-left: 2rem;
 
   button {
     padding: 3px;
@@ -45,4 +56,37 @@
   img {
     border-radius: 100%;
   }
+}
+
+#index {
+  color: #fff;
+
+  h3 {
+    font-weight: bold;
+  }
+}
+
+.recently {
+  width: 350px;
+
+  @media screen and (min-width: 992px) {
+    width: 319px;
+  }
+
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+
+  cursor: pointer;
+
+  background-color: hsla(0, 0%, 100%, 0.1);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
