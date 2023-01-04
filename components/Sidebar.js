@@ -15,8 +15,6 @@ const Sidebar = () => {
   const { data: session } = useSession();
   let user = session?.user.username;
   const [playlists, setPlaylists] = useState([]);
-  const [playlistId, setPlaylistId] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -84,7 +82,7 @@ const Sidebar = () => {
         </li>
 
         <li>
-          <Link href="/" className={classes.sidebarLink}>
+          <Link href="/collection/playlists" className={classes.sidebarLink}>
             <SidebarSVG
               height="24"
               width="24"

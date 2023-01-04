@@ -7,6 +7,7 @@ import useBackgroundPicker from "../../hooks/useBackgroundPicker";
 import useSpotify from "../../hooks/useSpotify";
 import classes from "../../styles/Playlist.module.scss";
 import { addPlaylist } from "../../slices/playlistSlice";
+import Head from "next/head";
 
 // let img = "";
 const Playlist = () => {
@@ -16,7 +17,6 @@ const Playlist = () => {
   const spotifyApi = useSpotify();
   const playlistId = useSelector((state) => state.playlistId.value);
   const playlist = useSelector((state) => state.playlist.value);
-  const [imgURL, setImgURL] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -30,38 +30,50 @@ const Playlist = () => {
     fetchData();
   }, [spotifyApi, playlistId, dispatch]);
 
-  // if (playlist.length === undefined) {
-  //   img = playlist.images[0].url;
-  // }
-
   useBackgroundPicker(playlist.images?.[0].url);
+
+  console.log(playlist);
+
+  if (playlist.length === 0) {
+  }
 
   if (playlist.images) {
     return (
-      <section>
-        <div className={classes.playlist}>
-          <div className={classes.head}>
-            <Image
-              src={playlist?.images?.[0].url}
-              width={230}
-              height={230}
-              alt="ok"
-              priority
-            />
+      <>
+        <Head>
+          <title>Spotify Build - {playlist?.name}</title>
+        </Head>
+        {playlist.length === 0 ? (
+          <div className="loading">
+            <h1>loading</h1>
+          </div>
+        ) : (
+          <section>
+            <div className={classes.playlist}>
+              <div className={classes.head}>
+                <Image
+                  src={playlist?.images?.[0].url}
+                  width={230}
+                  height={230}
+                  alt="ok"
+                  priority
+                />
 
-            <div style={{ marginTop: "4rem" }}>
-              <p>PLAYLIST</p>
-              <h1>{playlist?.name}</h1>
-              <div className="d-flex gap-2">
-                <p>{playlist?.owner?.display_name}</p>
-                <span>.</span>
-                <p>{playlist?.tracks?.total + " " + "songs"}</p>
+                <div style={{ marginTop: "4rem" }}>
+                  <p>PLAYLIST</p>
+                  <h1>{playlist?.name}</h1>
+                  <div className="d-flex gap-2">
+                    <p>{playlist?.owner?.display_name}</p>
+                    <span>.</span>
+                    <p>{playlist?.tracks?.total + " " + "songs"}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <Songs />
-      </section>
+            <Songs />
+          </section>
+        )}
+      </>
     );
   }
 };

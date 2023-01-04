@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
-import { searchNow } from "../slices/searchSlice";
+import { recentSearch } from "../slices/recentSearchSlice";
 
 const SearchBar = () => {
   const spotifyApi = useSpotify();
@@ -15,13 +15,15 @@ const SearchBar = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     router.push(`/search/${search}`);
-    dispatch(searchNow(search));
+    console.log(search);
+    dispatch(recentSearch(search));
   };
+
   return (
     <Wrapper onSubmit={submitHandler} value={search}>
       <input
         type="text"
-        placeholder="search"
+        placeholder="What do you want to listen to?"
         onChange={(e) => setSearch(e.target.value)}
       />
     </Wrapper>

@@ -53,13 +53,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Spotify Build</title>
-        <meta name="description" content="Spotify Build created by @danztee" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       {!loading && (
         <section className="mt-2" id={classes.index}>
           <h2>Good evening</h2>

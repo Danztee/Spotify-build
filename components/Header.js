@@ -6,19 +6,34 @@ import classes from "../styles/Home.module.scss";
 import { useSession, signOut } from "next-auth/react";
 import SearchBar from "./SearchBar";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const { pathname } = router;
+
+  const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
   let newName = "";
   if (session?.user.name.length > 11) {
     newName = `${session?.user.name.substring(0, 13)}...`;
   }
 
+  let background = "";
+  if (
+    pathname === "/search/[searchResult]" ||
+    pathname === "/search" ||
+    pathname === "/collection/playlists"
+  ) {
+    background = "#121212";
+  } else {
+    background = `${backgroundColor}`;
+  }
+
   return (
     <header id={classes.header}>
-      <div id={classes.bottom}>
+      <div id={classes.bottom} style={{ background }}>
         <div id={classes.buttonContainer}>
           <div className="d-none d-lg-flex gap-3">
             <button className={classes.btn}>

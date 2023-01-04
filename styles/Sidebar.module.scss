@@ -10,6 +10,8 @@
   gap: 2rem;
   width: 17rem;
 
+  z-index: 9999;
+
   @media screen and (max-width: 992px) {
     height: 65px;
     background-color: #292929;

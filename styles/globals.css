@@ -33,14 +33,19 @@ hr {
 }
 
 main {
-  /* background-color: rgb(56, 72, 48, 0.4); */
   width: inherit;
   padding: 1rem 2rem;
   overflow: scroll;
-  /* background-color: rgb(55, 57, 55); */
 }
 
 .artiste-item + .artiste-item::before {
   white-space: pre;
   content: ", ";
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
 }
