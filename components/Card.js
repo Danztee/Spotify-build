@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   background-color: #181818;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-  width: 350px;
+  width: 300px;
   position: relative;
 
   padding: 1rem;

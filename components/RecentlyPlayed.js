@@ -35,6 +35,7 @@ const RecentlyPlayed = ({ img, name }) => {
 
 const Wrapper = styled.div`
   position: relative;
+  overflow: hidden;
 
   #cover {
     transition: background-color 1s ease;

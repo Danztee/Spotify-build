@@ -38,10 +38,14 @@ const Wrapper = styled.form`
     border: none;
     padding: 1rem;
 
-    width: 150%;
+    width: 120%;
 
-    @media screen and (max-width: 992px) {
-      width: 100%;
+    @media screen and (min-width: 768px) {
+      width: 200%;
+    }
+
+    @media screen and (min-width: 992px) {
+      width: 150%;
     }
   }
 `;

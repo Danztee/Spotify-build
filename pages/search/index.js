@@ -38,7 +38,7 @@ const Search = () => {
         <Wrapper className="mt-3">
           <h3>Recent searches</h3>
 
-          <div className="d-flex gap-5 mt-3 flex-wrap">
+          <div className="d-flex mt-3 flex-wrap" id="cover">
             {newRecent.map((recently, index) => {
               return (
                 <Card
@@ -47,8 +47,8 @@ const Search = () => {
                   key={index}
                   radius="50%"
                   role="artist"
-                  width="200px"
-                  style={{ height: "16rem" }}
+                  width="230px"
+                  style={{ height: "18rem" }}
                 />
               );
             })}
@@ -73,4 +73,14 @@ export async function getServerSideProps(context) {
 
 const Wrapper = styled.div`
   color: #fff;
+
+  #cover {
+    justify-content: center;
+    gap: 3rem;
+
+    @media screen and (min-width: 992px) {
+      justify-content: start;
+      gap: 1rem;
+    }
+  }
 `;

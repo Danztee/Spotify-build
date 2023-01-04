@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
   const { pathname } = request.nextUrl;
 
-  if (token === null || undefined) {
+  if (!token) {
     return NextResponse.rewrite(new URL("/login", request.url));
   }
 

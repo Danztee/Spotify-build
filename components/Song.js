@@ -1,6 +1,10 @@
 import { intervalToDuration } from "date-fns";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
 import millisToMinutesAndSeconds from "../lib/time";
 
@@ -13,6 +17,8 @@ const Song = ({ order, track }) => {
     start: new Date(track.added_at),
     end: new Date(),
   });
+
+  const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
   let durationTime = "";
 
@@ -35,7 +41,7 @@ const Song = ({ order, track }) => {
   }
 
   return (
-    <div className={classes.song}>
+    <Wrapper className={classes.song} backgroundColor={backgroundColor}>
       <p>{order + 1}</p>
 
       <div className={classes.title}>
@@ -47,12 +53,12 @@ const Song = ({ order, track }) => {
         />
 
         <p>
-          <span>{track?.track.name}</span> <br />
+          <span style={{ color: "#fff" }}>{track?.track.name}</span> <br />
           {track.track.artists.map((artiste) => {
             return (
-              <span key={artiste.id} className="artiste-item">
+              <Link key={artiste.id} className="artiste-item" href="/">
                 {artiste.name}
-              </span>
+              </Link>
             );
           })}
         </p>
@@ -69,8 +75,13 @@ const Song = ({ order, track }) => {
       <div className={classes.time}>
         {millisToMinutesAndSeconds(track.track.duration_ms)}
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  &:hover {
+    background-color: ${(props) => props.backgroundColor};
+  }
+`;
 export default Song;

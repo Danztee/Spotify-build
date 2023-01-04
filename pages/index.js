@@ -17,10 +17,10 @@ export default function Home() {
   const spotifyApi = useSpotify();
 
   const { data: session } = useSession();
-  const [recentlyPlayed, setRecentlyPlayed] = useState([]);
-  const [topArtists, setTopArtists] = useState([]);
-  const [topTracks, setTopTracks] = useState([]);
-  const [recommendations, setRecommendations] = useState([]);
+  const [recentlyPlayed, setRecentlyPlayed] = useState();
+  const [topArtists, setTopArtists] = useState();
+  const [topTracks, setTopTracks] = useState();
+  const [recommendations, setRecommendations] = useState();
 
   const [loading, setLoading] = useState(true);
 
@@ -45,15 +45,28 @@ export default function Home() {
       }
       fetchData();
     }
-
-    setLoading(false);
   }, [session, spotifyApi]);
 
-  useBackgroundPicker(recentlyPlayed[0]?.track.album.images[0].url);
+  // useBackgroundPicker(recentlyPlayed[0]?.track.album.images[0].url);
+
+  useEffect(() => {
+    if (
+      recentlyPlayed &&
+      topArtists &&
+      topTracks &&
+      recommendations !== undefined
+    ) {
+      setLoading(false);
+    }
+  }, [recentlyPlayed, topArtists, topTracks, recommendations]);
 
   return (
     <>
-      {!loading && (
+      {loading ? (
+        <div className="loading">
+          <h1>loading</h1>
+        </div>
+      ) : (
         <section className="mt-2" id={classes.index}>
           <h2>Good evening</h2>
 

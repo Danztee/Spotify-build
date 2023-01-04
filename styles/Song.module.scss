@@ -4,6 +4,13 @@
 
   display: grid;
   grid-template-columns: 5px 3.5fr auto;
+  margin-top: 0.4rem;
+  align-items: center;
+
+  &:hover {
+    background-color: blue;
+    border-radius: 5px;
+  }
 
   @media screen and (min-width: 992px) {
     grid-template-columns: 5px 3.5fr 2fr 2fr 1fr;
@@ -12,5 +19,14 @@
   .title {
     display: flex;
     gap: 2rem;
+
+    a {
+      text-decoration: none;
+      color: #b3b3b3;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }

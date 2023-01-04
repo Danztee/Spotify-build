@@ -1,15 +1,3 @@
-.play {
-  background: #1ed760;
-  width: fit-content;
-  padding: 1rem;
-  border-radius: 50%;
-  color: #000;
-
-  &:hover {
-    padding: 1.05rem;
-  }
-}
-
 .playMore {
   display: flex;
   align-items: center;
@@ -33,6 +21,7 @@
 #songsHeader {
   padding: 1rem 0;
   gap: 2rem;
+  // padding-left: 1rem;
 
   display: grid;
   grid-template-columns: 5px 3.5fr auto;

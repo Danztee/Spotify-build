@@ -9,7 +9,6 @@ import classes from "../../styles/Playlist.module.scss";
 import { addPlaylist } from "../../slices/playlistSlice";
 import Head from "next/head";
 
-// let img = "";
 const Playlist = () => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
@@ -34,9 +33,6 @@ const Playlist = () => {
 
   console.log(playlist);
 
-  if (playlist.length === 0) {
-  }
-
   if (playlist.images) {
     return (
       <>
@@ -51,16 +47,18 @@ const Playlist = () => {
           <section>
             <div className={classes.playlist}>
               <div className={classes.head}>
-                <Image
-                  src={playlist?.images?.[0].url}
-                  width={230}
-                  height={230}
-                  alt="ok"
-                  priority
-                />
+                <div className={classes.img}>
+                  <Image
+                    src={playlist?.images?.[0].url}
+                    width={230}
+                    height={230}
+                    alt="ok"
+                    priority
+                  />
+                </div>
 
-                <div style={{ marginTop: "4rem" }}>
-                  <p>PLAYLIST</p>
+                <div className={classes.cover}>
+                  <p className="d-none d-lg-block">PLAYLIST</p>
                   <h1>{playlist?.name}</h1>
                   <div className="d-flex gap-2">
                     <p>{playlist?.owner?.display_name}</p>
