@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 function Layout({ children }) {
   const { data: session } = useSession();
@@ -10,9 +11,12 @@ function Layout({ children }) {
   const router = useRouter();
   const { pathname } = router;
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
+  const backgroundImg = useSelector((state) => state.backgroundColor.image);
 
   let background = "";
-  if (
+  if (pathname === "/artist/[artistId]") {
+    background = `url(${backgroundImg})`;
+  } else if (
     pathname === "/search/[searchResult]" ||
     pathname === "/search" ||
     pathname === "/collection/playlists"
@@ -26,12 +30,15 @@ function Layout({ children }) {
     <>
       <div className="w-100" id="spotify">
         {pathname !== "/login" && <Sidebar />}
-        <main
-          style={{
-            background: session && background,
-          }}
-        >
-          {children}
+        <main>
+          <div
+            style={{ background: session && background }}
+            className={
+              pathname === "/artist/[artistId]" ? "parallax" : "default"
+            }
+          >
+            {children}
+          </div>
         </main>
         <footer>{}</footer>
       </div>

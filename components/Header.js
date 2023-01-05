@@ -24,9 +24,12 @@ const Header = () => {
   if (
     pathname === "/search/[searchResult]" ||
     pathname === "/search" ||
-    pathname === "/collection/playlists"
+    pathname === "/collection/playlists",
+    pathname === "/artist/artistId"
   ) {
     background = "#121212";
+  } else if (pathname === "/artist/[artistId]") {
+    background = null;
   } else {
     background = `${backgroundColor}`;
   }

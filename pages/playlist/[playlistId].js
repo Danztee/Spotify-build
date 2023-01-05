@@ -31,8 +31,6 @@ const Playlist = () => {
 
   useBackgroundPicker(playlist.images?.[0].url);
 
-  console.log(playlist);
-
   if (playlist.images) {
     return (
       <>

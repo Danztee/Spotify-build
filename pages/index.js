@@ -47,8 +47,6 @@ export default function Home() {
     }
   }, [session, spotifyApi]);
 
-  // useBackgroundPicker(recentlyPlayed[0]?.track.album.images[0].url);
-
   useEffect(() => {
     if (
       recentlyPlayed &&
@@ -59,6 +57,8 @@ export default function Home() {
       setLoading(false);
     }
   }, [recentlyPlayed, topArtists, topTracks, recommendations]);
+
+  // useBackgroundPicker(recentlyPlayed[0]?.track.album.images[0].url);
 
   return (
     <>
@@ -84,7 +84,16 @@ export default function Home() {
               {topArtists.map((topArtist, index) => {
                 const name = topArtist.name;
                 const img = topArtist.images[0].url;
-                return <TopArtists name={name} img={img} key={index} />;
+                const id = topArtist.id;
+                return (
+                  <TopArtists
+                    name={name}
+                    img={img}
+                    key={index}
+                    type={topArtist.type}
+                    id={id}
+                  />
+                );
               })}
             </div>
           </div>
@@ -102,6 +111,8 @@ export default function Home() {
                     img={img}
                     key={index}
                     trackName={trackName}
+                    type={topTrack.type}
+                    id={topTrack.id}
                   />
                 );
               })}

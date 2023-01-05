@@ -20,12 +20,23 @@ const SearchResult = () => {
   const [relatedArtists, setRelatedArtists] = useState();
 
   const [hover, setHover] = useState(false);
+  const [hover2, setHover2] = useState(false);
 
-  const handleHover = (e) => {
+  const handleHover = () => {
     setHover(true);
   };
-  const handleOut = (e) => {
+  const handleOut = () => {
     setHover(false);
+  };
+
+  function handleHover2(e) {
+    // console.log(e.currentTarget);
+    // console.log(this);
+    // // setHover2(true);
+    // this.setHover2(true);
+  }
+  const handleOut2 = () => {
+    setHover2(false);
   };
 
   useEffect(() => {
@@ -76,7 +87,7 @@ const SearchResult = () => {
                 </div>
               )}
               <Image
-                src={artistPic[0].url}
+                src={artistPic[1]?.url}
                 width={100}
                 height={100}
                 alt={artistName}
@@ -93,19 +104,55 @@ const SearchResult = () => {
             <h5>Songs</h5>
             <div className="songContainer mt-4">
               {searchedTracks.map((track, index) => {
-                const name = track.artists[0].name;
+                const name = track.artists;
                 const song = track.name;
-                const image = track.album.images[1].url;
+                const image = track.album.images[0]?.url;
                 const duration = track.duration_ms;
+
                 return (
-                  <div id="mt-5" key={index} className="cover">
-                    <Image src={image} width="50" height="50" alt={"song"} />
+                  <div
+                    id="mt-5"
+                    key={index}
+                    className="cover"
+                    onMouseEnter={(e) => handleHover2(e)}
+                    onMouseLeave={handleOut2}
+                  >
+                    <div style={{ position: "relative" }}>
+                      {hover2 && (
+                        <Play
+                          style={{
+                            position: "absolute",
+                            background: "none",
+                            color: "#fff",
+                            padding: "0",
+                            left: "5px",
+                            top: "10px",
+                          }}
+                          size={20}
+                        />
+                      )}
+                      <Image src={image} width="50" height="50" alt={"song"} />
+                    </div>
 
                     <div className="music">
-                      <span>{song}</span>
-                      <Link href="/" id="link">
-                        {name}
-                      </Link>
+                      <span>
+                        {`${song.substring(0, 25)}`}
+                        {song.length > 25 ? "..." : ""}
+                      </span>
+
+                      <div>
+                        {name.map((artiste) => {
+                          return (
+                            <Link
+                              key={artiste.id}
+                              className="artiste-item"
+                              href="/"
+                            >
+                              {artiste?.name}
+                            </Link>
+                          );
+                        })}
+                      </div>
                     </div>
 
                     <span className="duration">
@@ -122,7 +169,7 @@ const SearchResult = () => {
             <div className="d-flex flex-wrap gap-3 mt-3 justify-content-center">
               {relatedArtists.map((topArtist, index) => {
                 const name = topArtist.name;
-                const img = topArtist.images[0].url;
+                const img = topArtist.images[0]?.url;
                 return (
                   <Card
                     name={name}
@@ -181,6 +228,10 @@ const Wrapper = styled.div`
       &:hover {
         background-color: #242424;
         border-radius: 5px;
+
+        img {
+          opacity: 0.5;
+        }
       }
 
       .music {

@@ -7,6 +7,8 @@
   margin-top: 0.4rem;
   align-items: center;
 
+  padding-left: 1rem;
+
   &:hover {
     background-color: blue;
     border-radius: 5px;
@@ -28,5 +30,11 @@
         text-decoration: underline;
       }
     }
+  }
+
+  .playBtn {
+    background: none;
+    color: #fff;
+    padding: 0;
   }
 }

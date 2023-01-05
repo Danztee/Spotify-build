@@ -28,5 +28,6 @@ export const config = {
     "/playlist/:path*",
     "/search/:path*",
     "/collection/:path*",
+    "/artist/:path*",
   ],
 };

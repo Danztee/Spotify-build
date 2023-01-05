@@ -9,9 +9,12 @@ import useSpotify from "../hooks/useSpotify";
 import millisToMinutesAndSeconds from "../lib/time";
 
 import classes from "../styles/Song.module.scss";
+import Play from "./Play";
 
 const Song = ({ order, track }) => {
   const spotifyApi = useSpotify();
+
+  const [hover, setHover] = useState(false);
 
   const duration = intervalToDuration({
     start: new Date(track.added_at),
@@ -40,13 +43,29 @@ const Song = ({ order, track }) => {
     }`;
   }
 
+  const handleHover = (e) => {
+    setHover(true);
+  };
+  const handleOut = (e) => {
+    setHover(false);
+  };
+
   return (
-    <Wrapper className={classes.song} backgroundColor={backgroundColor}>
-      <p>{order + 1}</p>
+    <Wrapper
+      className={classes.song}
+      backgroundColor={backgroundColor}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleOut}
+    >
+      {hover ? (
+        <Play className={classes.playBtn} size={"20"} />
+      ) : (
+        <p>{order + 1}</p>
+      )}
 
       <div className={classes.title}>
         <Image
-          src={track.track.album.images[0].url}
+          src={track.track.album.images[0]?.url}
           width="50"
           height="50"
           alt="ok"

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: "#121212",
+  image: "",
 };
 
 export const backgroundSlice = createSlice({
@@ -11,10 +12,11 @@ export const backgroundSlice = createSlice({
     changeBackground: (state, action) => {
       state.value = action.payload;
     },
+    changeImage: (state, action) => {
+      state.image = action.payload;
+    },
   },
 });
 
-export const { changeBackground } = backgroundSlice.actions;
+export const { changeBackground, changeImage } = backgroundSlice.actions;
 export default backgroundSlice.reducer;
-
-// rgb(154,144,117)

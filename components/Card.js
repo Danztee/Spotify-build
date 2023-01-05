@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import Play from "./Play";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   cursor: pointer;
@@ -54,14 +55,30 @@ const Wrapper = styled.div`
   }
 `;
 
-const Card = ({ name, img, role, radius, width, style }) => {
+const Card = ({ name, img, role, radius, width, style, type, id }) => {
   const [hover, setHover] = useState(false);
+  const router = useRouter();
 
   const handleHover = (e) => {
     setHover(true);
   };
   const handleOut = (e) => {
     setHover(false);
+  };
+
+  const handleClick = (e, id) => {
+    const parent = e.currentTarget;
+    const type = parent.children[0].textContent;
+
+    if (type === "artist") {
+      console.log(type);
+      router.push(`/artist/${id}`);
+    }
+
+    if (type === "track") {
+      console.log(type);
+      router.push(`/album/${id}`);
+    }
   };
 
   return (
@@ -71,7 +88,9 @@ const Card = ({ name, img, role, radius, width, style }) => {
       style={style}
       onMouseEnter={handleHover}
       onMouseLeave={handleOut}
+      onClick={(e) => handleClick(e, id)}
     >
+      <span style={{ display: "none" }}>{type}</span>
       {hover && (
         <div id="cover">
           <Play />
@@ -79,9 +98,9 @@ const Card = ({ name, img, role, radius, width, style }) => {
       )}
       <div className="image">
         <Image src={img} width={100} height="100" alt={name} unoptimized />
-        <p className="name mt-3">{name}</p>
-        <p className="artist">{role} </p>
       </div>
+      <p className="name mt-3">{name}</p>
+      <p className="artist">{role}</p>
     </Wrapper>
   );
 };

@@ -34,7 +34,6 @@ hr {
 
 main {
   width: inherit;
-  padding: 1rem 2rem;
   overflow: scroll;
 }
 
@@ -43,9 +42,27 @@ main {
   content: ", ";
 }
 
+.artiste-item:hover {
+  text-decoration: underline;
+}
+
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 80%;
+}
+
+a {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+.parallax {
+  height: 22rem;
+  background-attachment: fixed !important;
+}
+
+.default {
+  padding: 1rem 2rem;
 }

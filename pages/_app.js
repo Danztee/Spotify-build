@@ -3,14 +3,20 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
 import { store } from "../store";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
+  let backgroundImage = "";
+  if (typeof window !== "undefined") {
+    backgroundImage = localStorage.getItem("backgroundImage");
+  }
+
   return (
     <>
       <Head>
