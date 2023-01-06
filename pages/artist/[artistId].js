@@ -76,7 +76,7 @@ const Wrapper = styled.div`
   padding: 1rem 2rem;
 
   #aside {
-    margin-top: 0.75rem;
+    margin-top: 1rem;
 
     @media screen and (min-width: 992px) {
       margin-top: 3rem;

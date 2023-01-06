@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SidebarSVG from "../components/SidebarSVG";
 import Image from "next/image";
 import classes from "../styles/Home.module.scss";
@@ -24,15 +24,26 @@ const Header = () => {
   if (
     pathname === "/search/[searchResult]" ||
     pathname === "/search" ||
-    pathname === "/collection/playlists",
+    pathname === "/collection/playlists" ||
     pathname === "/artist/artistId"
   ) {
     background = "#121212";
-  } else if (pathname === "/artist/[artistId]") {
-    background = null;
   } else {
     background = `${backgroundColor}`;
   }
+
+  // if (
+  //   (pathname === "/search/[searchResult]" ||
+  //     pathname === "/search" ||
+  //     pathname === "/collection/playlists",
+  //   pathname === "/artist/artistId")
+  // ) {
+  //   background = "#121212";
+  // } else if (pathname === "/artist/[artistId]") {
+  //   background = null;
+  // } else {
+  //   background = `${backgroundColor}`;
+  // }
 
   return (
     <header id={classes.header}>

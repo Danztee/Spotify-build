@@ -15,7 +15,7 @@ body {
   color: #b3b3b3;
   font-family: "Space Grotesk", sans-serif;
   font-size: 15px;
-  background-color: #000;
+  background-color: #121212;
 }
 
 #spotify {
@@ -23,6 +23,14 @@ body {
   background-color: #000;
   height: 100vh;
   overflow: hidden;
+
+  margin-bottom: 3.5rem;
+}
+
+@media screen and (min-width: 992px) {
+  #spotify {
+    margin-bottom: 0;
+  }
 }
 
 p,
@@ -35,6 +43,11 @@ hr {
 main {
   width: inherit;
   overflow: scroll;
+  background-color: #121212;
+}
+
+#main {
+  padding: 1rem 2rem;
 }
 
 .artiste-item + .artiste-item::before {
@@ -58,11 +71,11 @@ a {
   text-decoration: none;
 }
 
-.parallax {
+/* .parallax {
   height: 22rem;
   background-attachment: fixed !important;
 }
 
 .default {
   padding: 1rem 2rem;
-}
+} */

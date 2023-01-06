@@ -39,6 +39,10 @@ const SearchResult = () => {
     setHover2(false);
   };
 
+  const clickHandler = () => {
+    router.push(`/artist/${searchedArtist.id}`);
+  };
+
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       async function fetchData() {
@@ -80,6 +84,7 @@ const SearchResult = () => {
               className="artist mt-4 cardCover"
               onMouseEnter={handleHover}
               onMouseLeave={handleOut}
+              onClick={clickHandler}
             >
               {hover && (
                 <div id="cover">
@@ -94,7 +99,12 @@ const SearchResult = () => {
                 className="mt-3"
               />
               <h3 style={{ fontWeight: "bold" }} className="mt-4">
-                {artistName}
+                <Link
+                  href={`/artist/${searchedArtist.id}`}
+                  style={{ color: "#fff" }}
+                >
+                  {artistName}
+                </Link>
               </h3>
               <p className="stagnant mt-1">ARTIST</p>
             </div>
@@ -146,7 +156,7 @@ const SearchResult = () => {
                             <Link
                               key={artiste.id}
                               className="artiste-item"
-                              href="/"
+                              href={`/artist/${artiste.id}`}
                             >
                               {artiste?.name}
                             </Link>
@@ -178,6 +188,8 @@ const SearchResult = () => {
                     width="235px"
                     radius="50%"
                     role="Artist"
+                    id={topArtist.id}
+                    type={topArtist.type}
                   />
                 );
               })}
@@ -206,6 +218,7 @@ const Wrapper = styled.div`
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: relative;
+    cursor: pointer;
 
     &:hover {
       background-color: #242424;

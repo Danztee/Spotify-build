@@ -6,10 +6,11 @@ import useSpotify from "../hooks/useSpotify";
 import millisToMinutesAndSeconds from "../lib/time";
 
 const Bottom = ({ id, topTracks, music, type }) => {
-  console.log(music);
   const release_date = new Date(music?.album.release_date)
     .toDateString()
     .slice(4);
+
+  // console.log(music.album);
 
   if (type === "track") {
     return (
@@ -20,11 +21,14 @@ const Bottom = ({ id, topTracks, music, type }) => {
 
             <div className="title">
               <p>
-                <span style={{ color: "#fff" }}>{music?.album.name}</span>{" "}
-                <br />
+                <span style={{ color: "#fff" }}>{music?.name}</span> <br />
                 {music?.album.artists.map((artiste) => {
                   return (
-                    <Link key={artiste.id} className="artiste-item" href="/">
+                    <Link
+                      key={artiste.id}
+                      className="artiste-item"
+                      href={`/artist/${artiste.id}`}
+                    >
                       {artiste.name}
                     </Link>
                   );
@@ -32,7 +36,7 @@ const Bottom = ({ id, topTracks, music, type }) => {
               </p>
             </div>
 
-            <div className="duration">
+            <div className="duration" style={{ color: "#b3b3b3" }}>
               {millisToMinutesAndSeconds(music?.duration_ms)}
             </div>
           </li>
@@ -96,6 +100,9 @@ const Wrapper = styled.div`
     grid-template-columns: 30px 9fr 1fr;
     align-items: center;
 
+    @media screen and (min-width: 992px) {
+      padding-left: ${({ type }) => (type === "track" ? "1rem" : "")};
+    }
     .title {
       display: flex;
       gap: 1rem;

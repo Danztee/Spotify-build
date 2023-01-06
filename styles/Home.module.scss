@@ -10,7 +10,7 @@
   justify-content: space-between;
   // background-color: #121212;
 
-  z-index: 99999999;
+  z-index: 1;
 
   background: transparent;
   padding: 1rem 0;
@@ -73,7 +73,7 @@
   width: 350px;
 
   @media screen and (min-width: 992px) {
-    width: 319px;
+    width: 310px;
   }
 
   height: 90px;

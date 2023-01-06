@@ -24,7 +24,11 @@ const Hero = ({
           <div className="track">
             {artists?.map((artiste) => {
               return (
-                <Link key={artiste.id} className="artiste-item" href="/">
+                <Link
+                  key={artiste.id}
+                  className="artiste-item"
+                  href={`/artist/${artiste.id}`}
+                >
                   {artiste?.name + " " + "."}
                 </Link>
               );
@@ -73,7 +77,7 @@ const Wrapper = styled.section`
       font-weight: 700;
 
       @media screen and (min-width: 992px) {
-        font-size: 5rem;
+        font-size: ${({ type }) => (type === "artist" ? "5rem" : "3rem")};
       }
     }
 

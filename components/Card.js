@@ -71,12 +71,10 @@ const Card = ({ name, img, role, radius, width, style, type, id }) => {
     const type = parent.children[0].textContent;
 
     if (type === "artist") {
-      console.log(type);
       router.push(`/artist/${id}`);
     }
 
     if (type === "track") {
-      console.log(type);
       router.push(`/album/${id}`);
     }
   };

@@ -24,6 +24,8 @@ export default function Home() {
 
   const [loading, setLoading] = useState(true);
 
+  const [background, setBackground] = useState();
+
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       async function fetchData() {
@@ -47,6 +49,17 @@ export default function Home() {
     }
   }, [session, spotifyApi]);
 
+  if (recentlyPlayed) {
+    async function background() {
+      const blob = await fetch(
+        recentlyPlayed[0]?.track.album.images[0].url
+      ).then((r) => r.blob());
+      setBackground(blob);
+    }
+    background();
+  }
+  useBackgroundPicker(background);
+
   useEffect(() => {
     if (
       recentlyPlayed &&
@@ -57,8 +70,6 @@ export default function Home() {
       setLoading(false);
     }
   }, [recentlyPlayed, topArtists, topTracks, recommendations]);
-
-  // useBackgroundPicker(recentlyPlayed[0]?.track.album.images[0].url);
 
   return (
     <>

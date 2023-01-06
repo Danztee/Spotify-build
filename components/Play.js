@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   color: #000;
   cursor: pointer;
   transition: background-color 1s ease;
-  z-index: 999;
+  /* z-index: 999; */
 
   .cover {
     width: fit-content;

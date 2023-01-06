@@ -72,10 +72,17 @@ const Song = ({ order, track }) => {
         />
 
         <p>
-          <span style={{ color: "#fff" }}>{track?.track.name}</span> <br />
+          <Link style={{ color: "#fff" }} href={`/album/${track?.track.id}`}>
+            {track?.track.name}
+          </Link>{" "}
+          <br />
           {track.track.artists.map((artiste) => {
             return (
-              <Link key={artiste.id} className="artiste-item" href="/">
+              <Link
+                key={artiste.id}
+                className="artiste-item"
+                href={`/artist/${artiste.id}`}
+              >
                 {artiste.name}
               </Link>
             );

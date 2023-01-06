@@ -16,10 +16,9 @@ const AlbumId = () => {
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       async function fetchData() {
-        const track = await spotifyApi.getTrack(albumId);
-        setTrack(track.body);
-
         try {
+          const track = await spotifyApi.getTrack(albumId);
+          setTrack(track.body);
         } catch (error) {
           console.log(error);
         }
@@ -35,7 +34,7 @@ const AlbumId = () => {
           <Hero
             image={track.album.images[0].url}
             album_type={track.album.album_type}
-            name={track.name}
+            name={track?.album.name}
             type={track.type}
             artists={track.album.artists}
             releaseDate={track.album.release_date}
@@ -58,7 +57,7 @@ const AlbumId = () => {
               </div>
             </div>
 
-            <div className="header">
+            <div className="header d-none d-lg-grid">
               <p>#</p>
               <p>TITLE</p>
               <SidebarSVG

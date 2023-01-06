@@ -13,30 +13,25 @@ function Layout({ children }) {
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
   const backgroundImg = useSelector((state) => state.backgroundColor.image);
 
-  let background = "";
-  if (pathname === "/artist/[artistId]") {
-    background = `url(${backgroundImg})`;
-  } else if (
-    pathname === "/search/[searchResult]" ||
-    pathname === "/search" ||
-    pathname === "/collection/playlists"
-  ) {
-    background = "#121212";
-  } else {
-    background = `linear-gradient(180deg, ${backgroundColor}, black 70%)`;
-  }
+  let background = `linear-gradient(180deg, ${backgroundColor}, #121212 30%)`;
+  // if (pathname === "/artist/[artistId]") {
+  //   background = `url(${backgroundImg})`;
+  // } else if (
+  //   pathname === "/search/[searchResult]" ||
+  //   pathname === "/search" ||
+  //   pathname === "/collection/playlists"
+  // ) {
+  //   background = "#121212";
+  // } else {
+  //   background = `linear-gradient(180deg, ${backgroundColor}, black 70%)`;
+  // }
 
   return (
     <>
       <div className="w-100" id="spotify">
         {pathname !== "/login" && <Sidebar />}
         <main>
-          <div
-            style={{ background: session && background }}
-            className={
-              pathname === "/artist/[artistId]" ? "parallax" : "default"
-            }
-          >
+          <div style={{ background: session && background }} id="main">
             {children}
           </div>
         </main>

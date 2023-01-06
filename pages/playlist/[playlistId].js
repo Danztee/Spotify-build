@@ -17,6 +17,8 @@ const Playlist = () => {
   const playlistId = useSelector((state) => state.playlistId.value);
   const playlist = useSelector((state) => state.playlist.value);
 
+  const [background, setBackground] = useState();
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -29,7 +31,23 @@ const Playlist = () => {
     fetchData();
   }, [spotifyApi, playlistId, dispatch]);
 
-  useBackgroundPicker(playlist.images?.[0].url);
+  // if (playlist) {
+  //   async function backgrounds() {
+  //     const blob = await fetch(playlist.images?.[0].url).then((r) => r.blob());
+  //     setBackground(blob);
+  //   }
+  //   backgrounds();
+  // }
+
+  if (playlist) {
+    async function background() {
+      const blob = await fetch(playlist.images?.[0].url).then((r) => r.blob());
+      console.log(blob);
+      // setBackground(blob);
+    }
+    background();
+  }
+  useBackgroundPicker(background);
 
   if (playlist.images) {
     return (
