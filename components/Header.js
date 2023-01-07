@@ -20,7 +20,7 @@ const Header = () => {
     newName = `${session?.user.name.substring(0, 13)}...`;
   }
 
-  let background = "";
+  let background = "#121212";
   if (
     pathname === "/search/[searchResult]" ||
     pathname === "/search" ||

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import millisToMinutesAndSeconds from "../lib/time";
 
 const Hero = ({
   image,
@@ -11,30 +12,36 @@ const Hero = ({
   artists,
   releaseDate,
   total,
+  // duration,
 }) => {
   return (
     <Wrapper className="mt-5" type={type}>
       <aside className="pic">
         <Image src={image} height="250" width="250" alt="text" />
       </aside>
+
       <aside className="title">
         <p>{album_type?.toUpperCase()}</p>
         <h1 className="mt-2">{name}</h1>
-        {type === "track" && (
-          <div className="track">
+        {type === "album" && (
+          <div className="album">
             {artists?.map((artiste) => {
               return (
                 <Link
                   key={artiste.id}
-                  className="artiste-item"
+                  className="album-artist"
                   href={`/artist/${artiste.id}`}
                 >
-                  {artiste?.name + " " + "."}
+                  {artiste?.name}
+                  <span style={{ margin: "0px 4px" }}>•</span>
                 </Link>
               );
             })}
-            <p>{releaseDate?.slice(0, 4) + " " + "."}</p>
+            <p>{releaseDate?.slice(0, 4)}</p>
+            <span style={{ margin: "0px 4px" }}>•</span>
             <p>{total} song</p>
+            {/* <span style={{ margin: "0px 4px" }}>•</span>
+            <p>{millisToMinutesAndSeconds(duration)}</p> */}
           </div>
         )}
       </aside>
@@ -81,9 +88,9 @@ const Wrapper = styled.section`
       }
     }
 
-    .track {
+    .album {
       display: flex;
-      gap: 1rem;
+      gap: 0.2rem;
 
       padding-top: 0;
       margin-bottom: -4rem;
@@ -91,6 +98,12 @@ const Wrapper = styled.section`
       @media screen and (min-width: 992px) {
         padding-top: 2rem;
       }
+    }
+  }
+
+  .album-artist {
+    &:hover {
+      text-decoration: underline;
     }
   }
 `;

@@ -7,7 +7,7 @@ const TopArtists = ({ name, img, type, id }) => {
       img={img}
       role={"Artist"}
       radius="50%"
-      width="235px"
+      width="230px"
       type={type}
       id={id}
     />

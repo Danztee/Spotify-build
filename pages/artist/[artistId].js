@@ -101,7 +101,10 @@ export default ArtistId;
 
 const Wrapper = styled.div`
   color: white;
-  padding: 1rem 2rem;
+
+  @media screen and (min-width: 992px) {
+    padding: 1rem 2rem;
+  }
 
   #aside {
     margin-top: 1rem;

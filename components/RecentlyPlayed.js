@@ -1,15 +1,13 @@
-import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import useSpotify from "../hooks/useSpotify";
+import React, { useState } from "react";
 import classes from "../styles/Home.module.scss";
-import logo from "../public/spotify.png";
 import Play from "./Play";
-import SidebarSVG from "./SidebarSVG";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
-const RecentlyPlayed = ({ img, name }) => {
+const RecentlyPlayed = ({ img, name, id }) => {
   const [hover, setHover] = useState(false);
+  const router = useRouter();
 
   const handleHover = (e) => {
     setHover(true);
@@ -17,9 +15,20 @@ const RecentlyPlayed = ({ img, name }) => {
   const handleOut = (e) => {
     setHover(false);
   };
+  const clickHandler = (id) => {
+    console.log(id);
+    console.log("ok");
+    router.push(`/album/${id}`);
+  };
 
   return (
-    <Wrapper onMouseEnter={handleHover} onMouseLeave={handleOut}>
+    <Wrapper
+      onMouseEnter={handleHover}
+      onMouseLeave={handleOut}
+      onClick={() => {
+        clickHandler(id);
+      }}
+    >
       {hover && (
         <div id="cover">
           <Play />
@@ -36,6 +45,7 @@ const RecentlyPlayed = ({ img, name }) => {
 const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 
   #cover {
     transition: background-color 1s ease;

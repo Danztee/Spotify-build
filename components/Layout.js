@@ -10,7 +10,17 @@ function Layout({ children }) {
   const { pathname } = router;
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
-  let background = `linear-gradient(180deg, ${backgroundColor}, #121212 60%)`;
+  let background = "#121212";
+  if (
+    pathname === "/search/[searchResult]" ||
+    pathname === "/search" ||
+    pathname === "/collection/playlists" ||
+    pathname === "/artist/artistId"
+  ) {
+    background = "#121212";
+  } else {
+    background = `linear-gradient(180deg, ${backgroundColor}, #121212 40%)`;
+  }
 
   return (
     <>

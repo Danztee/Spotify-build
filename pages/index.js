@@ -71,6 +71,18 @@ export default function Home() {
     }
   }, [recentlyPlayed, topArtists, topTracks, recommendations]);
 
+  const today = new Date();
+  const curHr = today.getHours();
+  let currentHour;
+
+  if (curHr < 12) {
+    currentHour = "Good morning";
+  } else if (curHr < 18) {
+    currentHour = "Good afternoon";
+  } else {
+    currentHour = "Good evening";
+  }
+
   return (
     <>
       {loading ? (
@@ -79,13 +91,21 @@ export default function Home() {
         </div>
       ) : (
         <section className="mt-2" id={classes.index}>
-          <h2>Good evening</h2>
+          <h2>{currentHour}</h2>
 
           <div className="d-flex flex-wrap gap-3 mt-4">
             {recentlyPlayed.map((recent, index) => {
               const name = recent.track.album.name;
               const img = recent.track.album.images[0].url;
-              return <RecentlyPlayed key={index} img={img} name={name} />;
+              return (
+                <RecentlyPlayed
+                  key={index}
+                  img={img}
+                  name={name}
+                  type={recent.track.type}
+                  id={recent.track.album.id}
+                />
+              );
             })}
           </div>
 
@@ -114,7 +134,7 @@ export default function Home() {
             <div className="d-flex flex-wrap gap-3 mt-3 justify-content-center">
               {topTracks.map((topTrack, index) => {
                 const name = topTrack?.album.artists[0].name;
-                const trackName = topTrack?.album.name;
+                const trackName = topTrack?.name;
                 const img = topTrack?.album.images[0].url;
                 return (
                   <TopTracks
@@ -123,7 +143,7 @@ export default function Home() {
                     key={index}
                     trackName={trackName}
                     type={topTrack.type}
-                    id={topTrack.id}
+                    id={topTrack.album.id}
                   />
                 );
               })}
@@ -143,6 +163,8 @@ export default function Home() {
                     img={img}
                     key={index}
                     trackName={trackName}
+                    type={"track"}
+                    id={recommendation?.id}
                   />
                 );
               })}

@@ -7,13 +7,11 @@ import useSpotify from "../hooks/useSpotify";
 import millisToMinutesAndSeconds from "../lib/time";
 import Play from "./Play";
 
-const Bottom = ({ id, topTracks, music, type, order }) => {
+const Bottom = ({ id, topTracks, albumTracks, type, order }) => {
   const [hover, setHover] = useState(false);
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
-  const release_date = new Date(music?.album.release_date)
-    .toDateString()
-    .slice(4);
+  // const release_date = new Date(album?.release_date).toDateString().slice(4);
 
   const handleHover = (e) => {
     setHover(true);
@@ -22,7 +20,7 @@ const Bottom = ({ id, topTracks, music, type, order }) => {
     setHover(false);
   };
 
-  if (type === "track") {
+  if (type === "album") {
     return (
       <Wrapper
         type={type}
@@ -32,12 +30,19 @@ const Bottom = ({ id, topTracks, music, type, order }) => {
       >
         <ul>
           <li className="song">
-            {hover ? <Play className="playBtn" size={"18"} /> : <p>1</p>}
+            {hover ? (
+              <Play className="playBtn" size={"18"} />
+            ) : (
+              <p>{order + 1}</p>
+            )}
 
             <div className="title">
               <p>
-                <span style={{ color: "#fff" }}>{music?.name}</span> <br />
-                {music?.album.artists.map((artiste) => {
+                <span style={{ color: "#fff", fontSize: "17px" }}>
+                  {albumTracks?.name}
+                </span>{" "}
+                <br />
+                {albumTracks?.artists.map((artiste) => {
                   return (
                     <Link
                       key={artiste.id}
@@ -52,14 +57,10 @@ const Bottom = ({ id, topTracks, music, type, order }) => {
             </div>
 
             <div className="duration" style={{ color: "#b3b3b3" }}>
-              {millisToMinutesAndSeconds(music?.duration_ms)}
+              {millisToMinutesAndSeconds(albumTracks?.duration_ms)}
             </div>
           </li>
         </ul>
-
-        <p className="mt-4" style={{ color: "#b3b3b3" }}>
-          {release_date}
-        </p>
       </Wrapper>
     );
   }
@@ -125,7 +126,7 @@ const Wrapper = styled.div`
     }
 
     @media screen and (min-width: 992px) {
-      padding-left: ${({ type }) => (type === "track" ? "1rem" : "")};
+      padding-left: ${({ type }) => (type === "album" ? "1rem" : "")};
     }
     .title {
       display: flex;

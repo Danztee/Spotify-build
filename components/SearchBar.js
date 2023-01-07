@@ -15,7 +15,6 @@ const SearchBar = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     router.push(`/search/${search}`);
-    console.log(search);
     dispatch(recentSearch(search));
   };
 

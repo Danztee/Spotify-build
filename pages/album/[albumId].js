@@ -11,7 +11,7 @@ import useSpotify from "../../hooks/useSpotify";
 
 const AlbumId = () => {
   const spotifyApi = useSpotify();
-  const [track, setTrack] = useState();
+  const [album, setAlbum] = useState();
   const { albumId } = useRouter().query;
 
   const [background, setBackground] = useState();
@@ -20,8 +20,8 @@ const AlbumId = () => {
     if (spotifyApi.getAccessToken()) {
       async function fetchData() {
         try {
-          const track = await spotifyApi.getTrack(albumId);
-          setTrack(track.body);
+          const album = await spotifyApi.getAlbum(albumId);
+          setAlbum(album.body);
         } catch (error) {
           console.log(error);
         }
@@ -31,32 +31,30 @@ const AlbumId = () => {
   }, [albumId, spotifyApi]);
 
   useEffect(() => {
-    if (track) {
+    if (album) {
       async function background() {
-        const blob = await fetch(track.album.images[0].url).then((r) =>
-          r.blob()
-        );
+        const blob = await fetch(album.images[0].url).then((r) => r.blob());
         setBackground(blob);
       }
       background();
     }
-  }, [track]);
+  }, [album]);
 
   useBackgroundPicker(background);
 
   return (
     <div>
-      {track && (
+      {album && (
         <Wrapper>
           <Hero
-            image={track.album.images[0].url}
-            album_type={track.album.album_type}
-            name={track?.album.name}
-            type={track.type}
-            artists={track.album.artists}
-            releaseDate={track.album.release_date}
-            total={track.album.total_tracks}
-            duration={track.duration_ms}
+            image={album?.images[0].url}
+            album_type={album?.album_type}
+            name={album?.name}
+            type={album?.type}
+            artists={album?.artists}
+            releaseDate={album?.release_date}
+            total={album?.total_tracks}
+            // duration={album.tracks.items[0].duration_ms}
           />
 
           <aside className="" style={{ marginTop: "3rem" }}>
@@ -73,7 +71,6 @@ const AlbumId = () => {
                 />
               </div>
             </div>
-
             <div className="header d-none d-lg-grid">
               <p>#</p>
               <p>TITLE</p>
@@ -87,8 +84,23 @@ const AlbumId = () => {
               />
             </div>
 
-            <Bottom music={track} type={track.type} />
+            {album?.tracks.items.map((track, i) => {
+              return (
+                <Bottom
+                  albumTracks={track}
+                  type={"album"}
+                  key={i}
+                  order={i}
+                  album={album}
+                />
+              );
+            })}
           </aside>
+
+          <div className="copyright mt-4">
+            <p>{new Date(album?.release_date).toDateString().slice(4)}</p>{" "}
+            <p>{album?.label}</p>
+          </div>
         </Wrapper>
       )}
     </div>
@@ -97,6 +109,11 @@ const AlbumId = () => {
 
 const Wrapper = styled.div`
   color: white;
+
+  .copyright {
+    font-size: 14px;
+    color: #b3b3b3;
+  }
 
   .playMore {
     display: flex;

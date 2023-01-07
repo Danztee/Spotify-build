@@ -50,6 +50,8 @@ const Song = ({ order, track }) => {
     setHover(false);
   };
 
+  console.log(track);
+
   return (
     <Wrapper
       className={classes.song}
@@ -69,10 +71,14 @@ const Song = ({ order, track }) => {
           width="50"
           height="50"
           alt="ok"
+          className="d-none d-lg-block"
         />
 
         <p>
-          <Link style={{ color: "#fff" }} href={`/album/${track?.track.id}`}>
+          <Link
+            style={{ color: "#fff" }}
+            href={`/album/${track?.track.album.id}`}
+          >
             {track?.track.name}
           </Link>{" "}
           <br />

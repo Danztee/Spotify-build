@@ -6,18 +6,22 @@ import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   cursor: pointer;
-  background-color: #181818;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  background-color: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 300px;
   position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #242424;
+  }
 
   padding: 1rem;
   transition: background-color 0.3s ease;
-  border-radius: 5px;
+  border-radius: 10px;
   padding-bottom: 2rem;
 
-  height: 19rem;
+  /* height: 19rem; */
 
   @media screen and (min-width: 992px) {
     width: ${(props) => props.width};
@@ -44,14 +48,16 @@ const Wrapper = styled.div`
       height: 90%;
       border-radius: ${(props) => props.radius};
     }
+  }
 
-    .name {
-      font-weight: bold;
-    }
+  .name {
+    font-weight: bold;
+    font-size: 17px;
+  }
 
-    .artist {
-      color: #6a6a6a;
-    }
+  .artist {
+    color: #b3b3b3;
+    font-size: 14px;
   }
 `;
 
@@ -97,7 +103,7 @@ const Card = ({ name, img, role, radius, width, style, type, id }) => {
       <div className="image">
         <Image src={img} width={100} height="100" alt={name} unoptimized />
       </div>
-      <p className="name mt-3">{name}</p>
+      <p className="name">{name}</p>
       <p className="artist">{role}</p>
     </Wrapper>
   );
