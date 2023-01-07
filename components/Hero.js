@@ -19,7 +19,7 @@ const Hero = ({
       </aside>
       <aside className="title">
         <p>{album_type?.toUpperCase()}</p>
-        <h1>{name}</h1>
+        <h1 className="mt-2">{name}</h1>
         {type === "track" && (
           <div className="track">
             {artists?.map((artiste) => {
@@ -73,7 +73,7 @@ const Wrapper = styled.section`
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: ${({ type }) => (type === "artist" ? "2.5rem" : "1.5rem")};
       font-weight: 700;
 
       @media screen and (min-width: 992px) {

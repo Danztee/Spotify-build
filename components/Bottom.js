@@ -1,23 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
 import millisToMinutesAndSeconds from "../lib/time";
+import Play from "./Play";
 
-const Bottom = ({ id, topTracks, music, type }) => {
+const Bottom = ({ id, topTracks, music, type, order }) => {
+  const [hover, setHover] = useState(false);
+  const backgroundColor = useSelector((state) => state.backgroundColor.value);
+
   const release_date = new Date(music?.album.release_date)
     .toDateString()
     .slice(4);
 
-  // console.log(music.album);
+  const handleHover = (e) => {
+    setHover(true);
+  };
+  const handleOut = (e) => {
+    setHover(false);
+  };
 
   if (type === "track") {
     return (
-      <Wrapper type={type}>
+      <Wrapper
+        type={type}
+        backgroundColor={backgroundColor}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleOut}
+      >
         <ul>
           <li className="song">
-            <p>1</p>
+            {hover ? <Play className="playBtn" size={"18"} /> : <p>1</p>}
 
             <div className="title">
               <p>
@@ -51,31 +66,34 @@ const Bottom = ({ id, topTracks, music, type }) => {
 
   if (type === "artist") {
     return (
-      <Wrapper type={type}>
-        <h4 style={{ fontWeight: "bold" }}>Popular</h4>
-
+      <Wrapper
+        type={type}
+        backgroundColor={backgroundColor}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleOut}
+      >
         <ul className="songs">
-          {topTracks?.map((track, index) => {
-            return (
-              <li key={index} className="song">
-                <p>{index + 1}</p>
+          <li className="song">
+            {hover ? (
+              <Play className="playBtn" size={"18"} />
+            ) : (
+              <p>{order + 1}</p>
+            )}
 
-                <div className="title">
-                  <Image
-                    src={track?.album.images[0].url}
-                    width="50"
-                    height="50"
-                    alt="ok"
-                  />
-                  <span style={{ color: "#fff" }}>{track?.name}</span> <br />
-                </div>
+            <div className="title">
+              <Image
+                src={topTracks?.album.images[0].url}
+                width="50"
+                height="50"
+                alt="ok"
+              />
+              <span style={{ color: "#fff" }}>{topTracks?.name}</span> <br />
+            </div>
 
-                <div className="duration">
-                  {millisToMinutesAndSeconds(track?.duration_ms)}
-                </div>
-              </li>
-            );
-          })}
+            <div className="duration">
+              {millisToMinutesAndSeconds(topTracks?.duration_ms)}
+            </div>
+          </li>
         </ul>
       </Wrapper>
     );
@@ -84,7 +102,7 @@ const Bottom = ({ id, topTracks, music, type }) => {
 
 const Wrapper = styled.div`
   color: white;
-  margin-top: ${({ type }) => (type === "artist" ? "2rem" : "")};
+  /* margin-top: ${({ type }) => (type === "artist" ? "2rem" : "")}; */
 
   .songs {
     margin-left: 0.5rem;
@@ -95,10 +113,16 @@ const Wrapper = styled.div`
   }
 
   .song {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     display: grid;
     grid-template-columns: 30px 9fr 1fr;
     align-items: center;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: ${(props) => props.backgroundColor};
+      border-radius: 5px;
+    }
 
     @media screen and (min-width: 992px) {
       padding-left: ${({ type }) => (type === "track" ? "1rem" : "")};
@@ -112,6 +136,13 @@ const Wrapper = styled.div`
         gap: 2rem;
       }
     }
+  }
+
+  .playBtn {
+    background: none;
+    color: #fff;
+    padding: 0;
+    margin: 0;
   }
 `;
 export default Bottom;

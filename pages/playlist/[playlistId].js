@@ -8,6 +8,7 @@ import useSpotify from "../../hooks/useSpotify";
 import classes from "../../styles/Playlist.module.scss";
 import { addPlaylist } from "../../slices/playlistSlice";
 import Head from "next/head";
+import absoluteUrl from "next-absolute-url";
 
 const Playlist = () => {
   const dispatch = useDispatch();
@@ -31,22 +32,19 @@ const Playlist = () => {
     fetchData();
   }, [spotifyApi, playlistId, dispatch]);
 
-  // if (playlist) {
-  //   async function backgrounds() {
-  //     const blob = await fetch(playlist.images?.[0].url).then((r) => r.blob());
-  //     setBackground(blob);
-  //   }
-  //   backgrounds();
-  // }
-
-  if (playlist) {
-    async function background() {
-      const blob = await fetch(playlist.images?.[0].url).then((r) => r.blob());
-      console.log(blob);
-      // setBackground(blob);
+  useEffect(() => {
+    if (playlist) {
+      async function background() {
+        const blob = await fetch(playlist.images?.[0].url).then((r) =>
+          r.blob()
+        );
+        console.log(blob);
+        setBackground(blob);
+      }
+      background();
     }
-    background();
-  }
+  }, [playlist]);
+
   useBackgroundPicker(background);
 
   if (playlist.images) {

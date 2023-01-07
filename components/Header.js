@@ -32,25 +32,12 @@ const Header = () => {
     background = `${backgroundColor}`;
   }
 
-  // if (
-  //   (pathname === "/search/[searchResult]" ||
-  //     pathname === "/search" ||
-  //     pathname === "/collection/playlists",
-  //   pathname === "/artist/artistId")
-  // ) {
-  //   background = "#121212";
-  // } else if (pathname === "/artist/[artistId]") {
-  //   background = null;
-  // } else {
-  //   background = `${backgroundColor}`;
-  // }
-
   return (
     <header id={classes.header}>
       <div id={classes.bottom} style={{ background }}>
         <div id={classes.buttonContainer}>
           <div className="d-none d-lg-flex gap-3">
-            <button className={classes.btn}>
+            <button className={classes.btn} onClick={() => history.go(-1)}>
               <SidebarSVG
                 height="24"
                 width="24"

@@ -6,12 +6,15 @@ import Bottom from "../../components/Bottom";
 import Hero from "../../components/Hero";
 import Play from "../../components/Play";
 import SidebarSVG from "../../components/SidebarSVG";
+import useBackgroundPicker from "../../hooks/useBackgroundPicker";
 import useSpotify from "../../hooks/useSpotify";
 
 const AlbumId = () => {
   const spotifyApi = useSpotify();
   const [track, setTrack] = useState();
   const { albumId } = useRouter().query;
+
+  const [background, setBackground] = useState();
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -26,6 +29,20 @@ const AlbumId = () => {
       fetchData();
     }
   }, [albumId, spotifyApi]);
+
+  useEffect(() => {
+    if (track) {
+      async function background() {
+        const blob = await fetch(track.album.images[0].url).then((r) =>
+          r.blob()
+        );
+        setBackground(blob);
+      }
+      background();
+    }
+  }, [track]);
+
+  useBackgroundPicker(background);
 
   return (
     <div>
@@ -87,9 +104,13 @@ const Wrapper = styled.div`
     gap: 1rem;
     justify-content: end;
 
+    padding-top: 1.5rem;
+
     @media screen and (min-width: 992px) {
       justify-content: start;
       gap: 2rem;
+
+      padding-top: 0;
     }
 
     .more {
@@ -104,7 +125,7 @@ const Wrapper = styled.div`
   .header {
     margin-top: 2rem;
     display: grid;
-    grid-template-columns: 30px 8fr 1fr;
+    grid-template-columns: 30px 10fr 1fr;
     border-bottom: solid 1px #fff;
     padding-left: 1rem;
     padding-bottom: 0.5rem;

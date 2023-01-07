@@ -62,7 +62,6 @@ async function useBackgroundPicker(blob) {
     reader.readAsDataURL(blob);
   });
 
-  // In order to use the data url, we need to create an img and wait for it to load
   let img = document.createElement("img");
   img.onload = function (e) {
     var rgb = getAverageRGB(img);

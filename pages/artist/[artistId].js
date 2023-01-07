@@ -10,6 +10,7 @@ import Hero from "../../components/Hero";
 import Play from "../../components/Play";
 import SidebarSVG from "../../components/SidebarSVG";
 import Songs from "../../components/Songs";
+import useBackgroundPicker from "../../hooks/useBackgroundPicker";
 import useSpotify from "../../hooks/useSpotify";
 
 import { changeImage } from "../../slices/backgroundSlice";
@@ -19,6 +20,8 @@ const ArtistId = () => {
   const [artist, setArtist] = useState();
   const [topTracks, setTopTracks] = useState();
   const { artistId } = useRouter().query;
+
+  const [background, setBackground] = useState();
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -35,6 +38,18 @@ const ArtistId = () => {
       fetchData();
     }
   }, [spotifyApi, artistId]);
+
+  useEffect(() => {
+    if (artist) {
+      async function background() {
+        const blob = await fetch(artist.images[0].url).then((r) => r.blob());
+        setBackground(blob);
+      }
+      background();
+    }
+  }, [artist]);
+
+  useBackgroundPicker(background);
 
   return (
     <>
@@ -61,7 +76,20 @@ const ArtistId = () => {
               </div>
             </div>
 
-            <Bottom topTracks={topTracks} type={artist.type} />
+            <div className="mt-4">
+              <h4 style={{ fontWeight: "bold" }}>Popular</h4>
+            </div>
+
+            {topTracks?.map((track, i) => {
+              return (
+                <Bottom
+                  key={i}
+                  order={i}
+                  topTracks={track}
+                  type={artist.type}
+                />
+              );
+            })}
           </aside>
         </Wrapper>
       )}
