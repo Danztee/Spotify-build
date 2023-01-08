@@ -54,7 +54,7 @@ function getAverageRGB(imgEl) {
 
 async function useBackgroundPicker(blob) {
   const dispatch = useDispatch();
-  if (blob === undefined) return;
+  if (!blob) return;
 
   let dataUrl = await new Promise((resolve) => {
     let reader = new FileReader();

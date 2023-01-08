@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
@@ -6,13 +8,14 @@ import useSpotify from "../hooks/useSpotify";
 const Player = () => {
   const spotifyApi = useSpotify();
   const currentTrackId = useSelector((state) => state.currentTrack.value);
+  const [currentTrack, setCurrentTrack] = useState();
 
   useEffect(() => {
     if (spotifyApi.getAccessToken() && currentTrackId !== null) {
       async function fetchData() {
         try {
           const currentTrack = await spotifyApi.getAlbum(currentTrackId);
-          console.log(currentTrack);
+          setCurrentTrack(currentTrack.body);
         } catch (error) {
           console.error(error);
         }
@@ -21,13 +24,43 @@ const Player = () => {
     }
   }, [currentTrackId, spotifyApi]);
 
+  // if (!currentTrackId) return;
+  // console.log(currentTrack);
+
+  const TrackImg = currentTrack?.images[1].url;
+  const TrackName = currentTrack?.tracks.items[0].name;
+  const TrackArtistName = currentTrack?.tracks?.items[0]?.artists;
+
   return (
     <Wrapper>
       <div className="d-flex align-items-center gap-3">
-        <div className="img"></div>
+        {TrackImg ? (
+          <Image
+            src={TrackImg}
+            height="55"
+            width="55"
+            alt={TrackName}
+            unoptimized
+          />
+        ) : (
+          <div className="img"></div>
+        )}
+
         <div>
-          <p style={{ color: "#fff" }}>Emiliana</p>
-          <p style={{ fontSize: "14px" }}>ckay</p>
+          <p style={{ color: "#fff" }}>{TrackName ? TrackName : "TrackName"}</p>
+          {TrackArtistName
+            ? TrackArtistName.map((artiste) => {
+                return (
+                  <Link
+                    key={artiste.id}
+                    className="artiste-item"
+                    href={`/artist/${artiste.id}`}
+                  >
+                    {artiste.name}
+                  </Link>
+                );
+              })
+            : "Artist Name"}
         </div>
       </div>
 

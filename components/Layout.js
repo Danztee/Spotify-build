@@ -34,10 +34,12 @@ function Layout({ children }) {
           </div>
           <FooterLinks />
         </main>
+        {pathname !== "/login" && (
+          <footer className="none">
+            <Player />
+          </footer>
+        )}
       </div>
-      <footer className="none">
-        <Player />
-      </footer>
     </>
   );
 }
