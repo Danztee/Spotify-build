@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import Player from "./Player";
+import FooterLinks from "./FooterLinks";
 
 function Layout({ children }) {
   const { data: session } = useSession();
@@ -31,9 +32,12 @@ function Layout({ children }) {
           <div style={{ background: session && background }} id="main">
             {children}
           </div>
+          <FooterLinks />
         </main>
-        <footer>{/* <Player /> */}</footer>
       </div>
+      <footer className="none">
+        <Player />
+      </footer>
     </>
   );
 }

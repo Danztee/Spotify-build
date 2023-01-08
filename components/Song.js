@@ -10,7 +10,6 @@ import millisToMinutesAndSeconds from "../lib/time";
 
 import classes from "../styles/Song.module.scss";
 import Play from "./Play";
-import Player from "./Player";
 
 const Song = ({ order, track }) => {
   const spotifyApi = useSpotify();

@@ -16,8 +16,6 @@ const RecentlyPlayed = ({ img, name, id }) => {
     setHover(false);
   };
   const clickHandler = (id) => {
-    console.log(id);
-    console.log("ok");
     router.push(`/album/${id}`);
   };
 
@@ -31,7 +29,7 @@ const RecentlyPlayed = ({ img, name, id }) => {
     >
       {hover && (
         <div id="cover">
-          <Play />
+          <Play id={id} />
         </div>
       )}
       <div className={classes.recently}>
@@ -55,6 +53,7 @@ const Wrapper = styled.div`
     position: absolute;
     right: 0.5rem;
     margin-top: 1.3rem;
+    width: auto;
   }
 `;
 
