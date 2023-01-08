@@ -2,6 +2,7 @@ import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
+import Player from "./Player";
 
 function Layout({ children }) {
   const { data: session } = useSession();
@@ -31,7 +32,7 @@ function Layout({ children }) {
             {children}
           </div>
         </main>
-        <footer>{}</footer>
+        <footer>{/* <Player /> */}</footer>
       </div>
     </>
   );

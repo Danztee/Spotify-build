@@ -10,6 +10,7 @@ import millisToMinutesAndSeconds from "../lib/time";
 
 import classes from "../styles/Song.module.scss";
 import Play from "./Play";
+import Player from "./Player";
 
 const Song = ({ order, track }) => {
   const spotifyApi = useSpotify();
@@ -20,6 +21,7 @@ const Song = ({ order, track }) => {
     start: new Date(track.added_at),
     end: new Date(),
   });
+  // console.log(track);
 
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
@@ -50,8 +52,6 @@ const Song = ({ order, track }) => {
     setHover(false);
   };
 
-  console.log(track);
-
   return (
     <Wrapper
       className={classes.song}
@@ -60,7 +60,12 @@ const Song = ({ order, track }) => {
       onMouseLeave={handleOut}
     >
       {hover ? (
-        <Play className={classes.playBtn} size={"20"} />
+        <Play
+          className={classes.playBtn}
+          size={"20"}
+          id={track?.track.id}
+          uri={track?.track.uri}
+        />
       ) : (
         <p>{order + 1}</p>
       )}
@@ -72,6 +77,7 @@ const Song = ({ order, track }) => {
           height="50"
           alt="ok"
           className="d-none d-lg-block"
+          unoptimized
         />
 
         <p>

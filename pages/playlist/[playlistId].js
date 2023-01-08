@@ -8,7 +8,6 @@ import useSpotify from "../../hooks/useSpotify";
 import classes from "../../styles/Playlist.module.scss";
 import { addPlaylist } from "../../slices/playlistSlice";
 import Head from "next/head";
-import absoluteUrl from "next-absolute-url";
 
 const Playlist = () => {
   const dispatch = useDispatch();
@@ -38,7 +37,6 @@ const Playlist = () => {
         const blob = await fetch(playlist.images?.[0].url).then((r) =>
           r.blob()
         );
-        console.log(blob);
         setBackground(blob);
       }
       background();
@@ -68,6 +66,7 @@ const Playlist = () => {
                     height={230}
                     alt="ok"
                     priority
+                    unoptimized
                   />
                 </div>
 

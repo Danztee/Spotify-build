@@ -97,6 +97,7 @@ const SearchResult = () => {
                 height={100}
                 alt={artistName}
                 className="mt-3"
+                unoptimized
               />
               <h3 style={{ fontWeight: "bold" }} className="mt-4">
                 <Link
@@ -141,7 +142,13 @@ const SearchResult = () => {
                           size={20}
                         />
                       )}
-                      <Image src={image} width="50" height="50" alt={"song"} />
+                      <Image
+                        src={image}
+                        width="50"
+                        height="50"
+                        alt={"song"}
+                        unoptimized
+                      />
                     </div>
 
                     <div className="music">

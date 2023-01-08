@@ -17,7 +17,7 @@ const Hero = ({
   return (
     <Wrapper className="mt-5" type={type}>
       <aside className="pic">
-        <Image src={image} height="250" width="250" alt="text" />
+        <Image src={image} height="250" width="250" alt={name} unoptimized />
       </aside>
 
       <aside className="title">

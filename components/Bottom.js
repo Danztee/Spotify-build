@@ -86,7 +86,8 @@ const Bottom = ({ id, topTracks, albumTracks, type, order }) => {
                 src={topTracks?.album.images[0].url}
                 width="50"
                 height="50"
-                alt="ok"
+                alt="image"
+                unoptimized
               />
               <span style={{ color: "#fff" }}>{topTracks?.name}</span> <br />
             </div>

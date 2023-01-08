@@ -1,19 +1,13 @@
 import { getSession } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Bottom from "../../components/Bottom";
 import Hero from "../../components/Hero";
 import Play from "../../components/Play";
 import SidebarSVG from "../../components/SidebarSVG";
-import Songs from "../../components/Songs";
 import useBackgroundPicker from "../../hooks/useBackgroundPicker";
 import useSpotify from "../../hooks/useSpotify";
-
-import { changeImage } from "../../slices/backgroundSlice";
 
 const ArtistId = () => {
   const spotifyApi = useSpotify();

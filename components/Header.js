@@ -18,6 +18,8 @@ const Header = () => {
   let newName = "";
   if (session?.user.name.length > 11) {
     newName = `${session?.user.name.substring(0, 13)}...`;
+  } else {
+    newName = session?.user.name;
   }
 
   let background = "#121212";
@@ -72,6 +74,7 @@ const Header = () => {
               alt={session.user.name}
               width="30"
               height="30"
+              unoptimized
             />
           )}
           <p className="text-white d-none d-lg-block">{newName}</p>
