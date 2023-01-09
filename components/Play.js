@@ -12,15 +12,7 @@ const Play = ({ style, className, size, id, uri }) => {
 
   const playHandler = (e) => {
     e.stopPropagation();
-    // console.log(id);
-    // console.log(uri);
     dispatch(addCurrentTrack(id));
-    // spotifyApi.play({
-    //   uris: uri,
-    // });
-
-    // console.log(e.currentTarget.parentElement.parentElement);
-    // console.log("clicked");
   };
 
   return (

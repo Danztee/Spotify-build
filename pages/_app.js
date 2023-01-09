@@ -7,11 +7,15 @@ import { Provider, useSelector } from "react-redux";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import Image from "next/image";
+import FooterLinks from "../components/FooterLinks";
+import { useRouter } from "next/router";
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
+  const router = useRouter();
+  const { pathname } = router;
   let backgroundImage = "";
   if (typeof window !== "undefined") {
     backgroundImage = localStorage.getItem("backgroundImage");
@@ -31,6 +35,7 @@ export default function App({
           <Layout>
             {session && <Header />}
             <Component {...pageProps} />
+            {pathname !== "/lyrics" && session && <FooterLinks />}
           </Layout>
         </Provider>
       </SessionProvider>

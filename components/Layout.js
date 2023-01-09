@@ -20,6 +20,8 @@ function Layout({ children }) {
     pathname === "/artist/artistId"
   ) {
     background = "#121212";
+  } else if (pathname === "/lyrics") {
+    background = ` ${backgroundColor}`;
   } else {
     background = `linear-gradient(180deg, ${backgroundColor}, #121212 40%)`;
   }
@@ -32,7 +34,6 @@ function Layout({ children }) {
           <div style={{ background: session && background }} id="main">
             {children}
           </div>
-          <FooterLinks />
         </main>
         {pathname !== "/login" && (
           <footer className="none">

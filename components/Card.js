@@ -97,7 +97,7 @@ const Card = ({ name, img, role, radius, width, style, type, id }) => {
       <span style={{ display: "none" }}>{type}</span>
       {hover && (
         <div id="cover">
-          <Play />
+          <Play id={id} />
         </div>
       )}
       <div className="image">

@@ -1,17 +1,13 @@
 import { getSession, useSession } from "next-auth/react";
-import Head from "next/head";
-import Image from "next/image";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import RecentlyPlayed from "../components/RecentlyPlayed";
 import useSpotify from "../hooks/useSpotify";
 import classes from "../styles/Home.module.scss";
 
 import useBackgroundPicker from "../hooks/useBackgroundPicker";
-import { useDispatch } from "react-redux";
 import TopArtists from "../components/TopArtists";
 import TopTracks from "../components/TopTracks";
 import Recommendation from "../components/Recommendation";
-import useSWR from "swr";
 
 export default function Home() {
   const spotifyApi = useSpotify();
@@ -116,6 +112,7 @@ export default function Home() {
                 const name = topArtist.name;
                 const img = topArtist.images[0].url;
                 const id = topArtist.id;
+
                 return (
                   <TopArtists
                     name={name}
@@ -133,6 +130,7 @@ export default function Home() {
             <h3>My Top Tracks</h3>
             <div className="d-flex flex-wrap gap-3 mt-3 justify-content-center">
               {topTracks.map((topTrack, index) => {
+                // console.log(topTracks);
                 const name = topTrack?.album.artists[0].name;
                 const trackName = topTrack?.name;
                 const img = topTrack?.album.images[0].url;

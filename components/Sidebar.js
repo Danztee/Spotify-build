@@ -6,9 +6,8 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import useSpotify from "../hooks/useSpotify";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addPlaylistId } from "../slices/playlistIdSlice";
-import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const spotifyApi = useSpotify();

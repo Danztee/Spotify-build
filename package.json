@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jeve/lyrics-finder": "^1.0.1",
     "@next/font": "13.0.7",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.2",
@@ -16,6 +17,8 @@
     "eslint": "8.30.0",
     "eslint-config-next": "13.0.7",
     "lyrics-finder": "^21.7.0",
+    "lyrics-parse": "^1.1.1",
+    "lyrics-searcher": "^1.0.58",
     "next": "13.0.7",
     "next-auth": "^4.18.7",
     "react": "18.2.0",
@@ -23,6 +26,7 @@
     "react-redux": "^8.0.5",
     "react-spotify-web-playback": "^0.10.1",
     "sass": "^1.57.1",
+    "simple-find-lyrics": "^0.0.1",
     "spotify-web-api-node": "^5.0.2",
     "styled-components": "^5.3.6",
     "swr": "^2.0.0",

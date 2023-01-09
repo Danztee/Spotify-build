@@ -21,7 +21,14 @@ const FooterLinks = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 2.5rem 2rem;
+
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 3rem;
+
+  @media screen and(max-width: 992px) {
+    padding: 2.5rem 2rem;
+  }
 
   .links {
     display: flex;

@@ -1,14 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
+import { setLyrics } from "../slices/lyricsSlice";
+
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const Player = () => {
+  const dispatch = useDispatch();
   const spotifyApi = useSpotify();
   const currentTrackId = useSelector((state) => state.currentTrack.value);
   const [currentTrack, setCurrentTrack] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     if (spotifyApi.getAccessToken() && currentTrackId !== null) {
@@ -24,10 +30,24 @@ const Player = () => {
     }
   }, [currentTrackId, spotifyApi]);
 
-  // if (!currentTrackId) return;
-  // console.log(currentTrack);
+  const getLyrics = async (TrackName, TrackArtistName) => {
+    const res = await axios.get("/api/lyrics", {
+      params: {
+        artist: TrackArtistName,
+        title: TrackName,
+      },
+    });
+    const lyrics = res.data.lyrics;
+    if (!lyrics) return;
+    dispatch(setLyrics(lyrics));
+    router.push("/lyrics");
+  };
 
-  const TrackImg = currentTrack?.images[1].url;
+  const lyricsHandler = () => {
+    getLyrics(TrackName, TrackArtistName);
+  };
+
+  const TrackImg = currentTrack?.images[0].url;
   const TrackName = currentTrack?.tracks.items[0].name;
   const TrackArtistName = currentTrack?.tracks?.items[0]?.artists;
 
@@ -47,7 +67,9 @@ const Player = () => {
         )}
 
         <div>
-          <p style={{ color: "#fff" }}>{TrackName ? TrackName : "TrackName"}</p>
+          <p style={{ color: "#fff" }}>
+            {TrackName ? TrackName : "Track Name"}
+          </p>
           {TrackArtistName
             ? TrackArtistName.map((artiste) => {
                 return (
@@ -64,10 +86,10 @@ const Player = () => {
         </div>
       </div>
 
-      <div>
-        <h4 style={{ textDecoration: "underline", cursor: "pointer" }}>
+      <div onClick={lyricsHandler}>
+        <h5 style={{ textDecoration: "underline", cursor: "pointer" }}>
           view lyrics
-        </h4>
+        </h5>
       </div>
     </Wrapper>
   );

@@ -23,9 +23,10 @@ body {
   /* background-color: #000; */
   height: 100vh;
   overflow: hidden;
-
-  margin-bottom: 3.8rem;
-  padding-bottom: 6rem;
+  padding-bottom: 5rem;
+  /* margin-bottom: -10rem; */
+  /* margin-bottom: 3.8rem;
+  */
 }
 
 @media screen and (min-width: 992px) {
@@ -78,5 +79,11 @@ a {
 
 .none {
   position: absolute;
-  bottom: 0;
+  bottom: 4.1rem;
+}
+
+@media screen and (min-width: 992px) {
+  .none {
+    bottom: 0;
+  }
 }

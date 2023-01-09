@@ -30,5 +30,6 @@ export const config = {
     "/collection/:path*",
     "/artist/:path*",
     "/album/:path*",
+    "/lyrics",
   ],
 };

@@ -62,7 +62,7 @@ const Song = ({ order, track }) => {
         <Play
           className={classes.playBtn}
           size={"20"}
-          id={track?.track.id}
+          id={track?.track.album.id}
           uri={track?.track.uri}
         />
       ) : (

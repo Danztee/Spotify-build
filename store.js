@@ -5,6 +5,7 @@ import playlistReducer from "./slices/playlistSlice";
 import recentSearchReducer from "./slices/recentSearchSlice";
 import currentTrackReducer from "./slices/currentTrackIdSlice";
 import isPlayingReducer from "./slices/isPlayingSlice";
+import lyricsReducer from "./slices/lyricsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     recentSearch: recentSearchReducer,
     currentTrack: currentTrackReducer,
     isPlaying: isPlayingReducer,
+    lyrics: lyricsReducer,
   },
 });
