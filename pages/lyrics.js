@@ -20,7 +20,7 @@ const Lyrics = () => {
 
 const Wrapper = styled.div`
   letter-spacing: 3px;
-  /* display: flex; */
+  overflow: hidden;
 
   h3 {
     color: #fff;
