@@ -5,22 +5,18 @@ import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import useSpotify from "../hooks/useSpotify";
 import millisToMinutesAndSeconds from "../lib/time";
 
 import classes from "../styles/Song.module.scss";
 import Play from "./Play";
 
 const Song = ({ order, track }) => {
-  const spotifyApi = useSpotify();
-
   const [hover, setHover] = useState(false);
 
   const duration = intervalToDuration({
     start: new Date(track.added_at),
     end: new Date(),
   });
-  // console.log(track);
 
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
@@ -51,6 +47,7 @@ const Song = ({ order, track }) => {
     setHover(false);
   };
 
+  // console.log(track);
   return (
     <Wrapper
       className={classes.song}
@@ -64,6 +61,7 @@ const Song = ({ order, track }) => {
           size={"20"}
           id={track?.track.album.id}
           uri={track?.track.uri}
+          trackId={track?.track.id}
         />
       ) : (
         <p>{order + 1}</p>

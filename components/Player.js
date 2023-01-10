@@ -1,3 +1,5 @@
+import React from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,19 +18,29 @@ const Player = () => {
   const [currentTrack, setCurrentTrack] = useState();
   const router = useRouter();
 
+  const { pathname } = useRouter();
+
   useEffect(() => {
     if (spotifyApi.getAccessToken() && currentTrackId !== null) {
       async function fetchData() {
         try {
-          const currentTrack = await spotifyApi.getAlbum(currentTrackId);
-          setCurrentTrack(currentTrack.body);
+          if (
+            pathname === "/playlist/[playlistId]" ||
+            pathname === "/album/[albumId]"
+          ) {
+            const currentTrack = await spotifyApi.getTrack(currentTrackId);
+            setCurrentTrack(currentTrack.body);
+          } else {
+            const currentTrack = await spotifyApi.getAlbum(currentTrackId);
+            setCurrentTrack(currentTrack.body);
+          }
         } catch (error) {
-          console.error(error);
+          console.log(error);
         }
       }
       fetchData();
     }
-  }, [currentTrackId, spotifyApi]);
+  }, [currentTrackId, spotifyApi, pathname]);
 
   const getLyrics = async (TrackName, TrackArtistName) => {
     const res = await axios.get("/api/lyrics", {
@@ -47,9 +59,13 @@ const Player = () => {
     getLyrics(TrackName, TrackArtistName);
   };
 
-  const TrackImg = currentTrack?.images[0].url;
-  const TrackName = currentTrack?.tracks.items[0].name;
-  const TrackArtistName = currentTrack?.tracks?.items[0]?.artists;
+  const TrackImg =
+    currentTrack?.album?.images[0].url || currentTrack?.images[0].url;
+  const TrackName =
+    currentTrack?.album_type === "album"
+      ? currentTrack?.tracks.items[0].name
+      : currentTrack?.name;
+  const TrackArtistName = currentTrack?.artists;
 
   return (
     <Wrapper>
@@ -113,4 +129,4 @@ const Wrapper = styled.div`
     background: red;
   }
 `;
-export default Player;
+export default React.memo(Player);

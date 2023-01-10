@@ -11,15 +11,13 @@ const Bottom = ({ id, topTracks, albumTracks, type, order }) => {
   const [hover, setHover] = useState(false);
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
 
-  // console.log(albumTracks.id);
-  // const release_date = new Date(album?.release_date).toDateString().slice(4);
-
   const handleHover = (e) => {
     setHover(true);
   };
   const handleOut = (e) => {
     setHover(false);
   };
+  // console.log(albumTracks);
 
   if (type === "album") {
     return (
@@ -32,7 +30,12 @@ const Bottom = ({ id, topTracks, albumTracks, type, order }) => {
         <ul>
           <li className="song">
             {hover ? (
-              <Play className="playBtn" size={"18"} id={albumTracks.id} />
+              <Play
+                className="playBtn"
+                size={"18"}
+                id={albumTracks.id}
+                trackId={albumTracks.id}
+              />
             ) : (
               <p>{order + 1}</p>
             )}

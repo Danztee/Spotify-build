@@ -59,7 +59,7 @@ const AlbumId = () => {
 
           <aside className="" style={{ marginTop: "3rem" }}>
             <div className="playMore">
-              <Play size={30} />
+              <Play size={30} trackId={album?.tracks.items[0].id} />
 
               <div className="more">
                 <SidebarSVG
@@ -99,7 +99,7 @@ const AlbumId = () => {
 
           <div className="copyright mt-4">
             <p>{new Date(album?.release_date).toDateString().slice(4)}</p>{" "}
-            <p>{album?.label}</p>
+            <p>{album?.copyrights[0].text}</p>
           </div>
         </Wrapper>
       )}

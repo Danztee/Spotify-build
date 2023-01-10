@@ -3,15 +3,34 @@ import classes from "../styles/Songs.module.scss";
 import { useSelector } from "react-redux";
 import Song from "./Song";
 import Play from "./Play";
+import { useEffect } from "react";
+import useSpotify from "../hooks/useSpotify";
+import { useState } from "react";
 
 const Songs = () => {
+  const spotifyApi = useSpotify();
   const playlist = useSelector((state) => state.playlist.value);
   const backgroundColor = useSelector((state) => state.backgroundColor.value);
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      async function fetchData() {
+        try {
+          const playlistSong = await spotifyApi.getPlaylistTracks(playlist.id);
+          setId(playlistSong.body.items[0].track.id);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchData();
+    }
+  }, [playlist.id, spotifyApi]);
 
   return (
     <article className={classes.song}>
       <div className={classes.playMore}>
-        <Play />
+        <Play trackId={id} />
 
         <div className={classes.more}>
           <SidebarSVG

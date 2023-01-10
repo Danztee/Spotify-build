@@ -4,15 +4,24 @@ import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
 import { addCurrentTrack } from "../slices/currentTrackIdSlice";
 import SidebarSVG from "./SidebarSVG";
+import { useRouter } from "next/router";
 // import SpotifyPlayer from "react-spotify-web-playback";
 
-const Play = ({ style, className, size, id, uri }) => {
+const Play = ({ style, className, size, id, uri, trackId }) => {
   const dispatch = useDispatch();
-  const spotifyApi = useSpotify();
+  const { pathname } = useRouter();
 
   const playHandler = (e) => {
     e.stopPropagation();
-    dispatch(addCurrentTrack(id));
+
+    if (
+      pathname === "/playlist/[playlistId]" ||
+      pathname === "/album/[albumId]"
+    ) {
+      dispatch(addCurrentTrack(trackId));
+    } else {
+      dispatch(addCurrentTrack(id));
+    }
   };
 
   return (

@@ -24,8 +24,13 @@ const Wrapper = styled.div`
     font-weight: bold;
 
     @media screen and (min-width: 992px) {
-      font-size: 1.3rem;
-      white-space: inherit;
+      font-size: 1.4rem;
+      white-space: pre;
+      margin-left: 7rem;
+      word-wrap: break-word;
+
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 `;
