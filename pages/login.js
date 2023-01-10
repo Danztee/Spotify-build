@@ -1,12 +1,9 @@
 import { getProviders, signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const Login = ({ providers }) => {
-  const { data: session } = useSession();
-  console.log(session);
   return (
     <>
       <Head>
