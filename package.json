@@ -12,6 +12,7 @@
     "@jeve/lyrics-finder": "^1.0.1",
     "@next/font": "13.0.7",
     "@reduxjs/toolkit": "^1.9.1",
+    "@sentry/nextjs": "^7.30.0",
     "axios": "^1.2.2",
     "date-fns": "^2.29.3",
     "eslint": "8.30.0",

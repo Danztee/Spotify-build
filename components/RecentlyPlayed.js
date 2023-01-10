@@ -33,7 +33,14 @@ const RecentlyPlayed = ({ img, name, id }) => {
         </div>
       )}
       <div className={classes.recently}>
-        <Image src={img} alt={name} width={100} height={100} unoptimized />
+        <Image
+          src={img}
+          alt={name}
+          width={100}
+          height={100}
+          unoptimized
+          priority
+        />
         <p>{name}</p>
       </div>
     </Wrapper>

@@ -39,7 +39,6 @@ const Collection = () => {
 
         <div className="cover mt-4">
           {playlists.map((playlist, index) => {
-            console.log(playlist);
             return (
               <div
                 onClick={() => {

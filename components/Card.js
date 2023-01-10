@@ -99,7 +99,14 @@ const Card = ({ name, img, role, radius, width, style, type, id }) => {
         </div>
       )}
       <div className="image">
-        <Image src={img} width={100} height="100" alt={name} unoptimized />
+        <Image
+          src={img}
+          width={100}
+          height="100"
+          alt={name}
+          unoptimized
+          priority
+        />
       </div>
       <p className="name">{name}</p>
       <p className="artist">{role}</p>

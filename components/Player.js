@@ -1,5 +1,3 @@
-import React from "react";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,71 +10,71 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const Player = () => {
-  const dispatch = useDispatch();
-  const spotifyApi = useSpotify();
-  const currentTrackId = useSelector((state) => state.currentTrack.value);
-  const [currentTrack, setCurrentTrack] = useState();
-  const router = useRouter();
+  // const dispatch = useDispatch();
+  // const spotifyApi = useSpotify();
+  // const currentTrackId = useSelector((state) => state.currentTrack.value);
+  // const [currentTrack, setCurrentTrack] = useState();
+  // const router = useRouter();
 
-  const { pathname } = useRouter();
+  // const { pathname } = useRouter();
 
-  useEffect(() => {
-    if (spotifyApi.getAccessToken() && currentTrackId !== null) {
-      async function fetchData() {
-        try {
-          if (
-            pathname === "/playlist/[playlistId]" ||
-            pathname === "/album/[albumId]" ||
-            pathname === "/artist/[artistId]"
-          ) {
-            const currentTrack = await spotifyApi.getTrack(currentTrackId);
-            setCurrentTrack(currentTrack.body);
-          } else {
-            const currentTrack = await spotifyApi.getAlbum(currentTrackId);
-            setCurrentTrack(currentTrack.body);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      fetchData();
-    }
-  }, [currentTrackId, spotifyApi, pathname]);
+  // useEffect(() => {
+  //   if (spotifyApi.getAccessToken() && currentTrackId !== null) {
+  //     async function fetchData() {
+  //       try {
+  //         if (
+  //           pathname === "/playlist/[playlistId]" ||
+  //           pathname === "/album/[albumId]" ||
+  //           pathname === "/artist/[artistId]"
+  //         ) {
+  //           const currentTrack = await spotifyApi.getTrack(currentTrackId);
+  //           setCurrentTrack(currentTrack.body);
+  //         } else {
+  //           const currentTrack = await spotifyApi.getAlbum(currentTrackId);
+  //           setCurrentTrack(currentTrack.body);
+  //         }
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //     fetchData();
+  //   }
+  // }, [currentTrackId, spotifyApi, pathname]);
 
-  const getLyrics = async (TrackName, TrackArtistName) => {
-    const res = await axios.get("/api/lyrics", {
-      params: {
-        artist: TrackArtistName,
-        title: TrackName,
-      },
-    });
+  // const getLyrics = async (TrackName, TrackArtistName) => {
+  //   const res = await axios.get("/api/lyrics", {
+  //     params: {
+  //       artist: TrackArtistName,
+  //       title: TrackName,
+  //     },
+  //   });
 
-    const lyrics = res.data.lyrics;
-    if (!lyrics) return;
-    dispatch(setLyrics(lyrics));
-    router.push("/lyrics");
-  };
+  //   const lyrics = res.data.lyrics;
+  //   if (!lyrics) return;
+  //   dispatch(setLyrics(lyrics));
+  //   router.push("/lyrics");
+  // };
 
-  const lyricsHandler = () => {
-    getLyrics(TrackName, TrackArtistName);
-  };
+  // const lyricsHandler = () => {
+  //   getLyrics(TrackName, TrackArtistName);
+  // };
 
-  const TrackImg =
-    currentTrack?.album?.images[0].url || currentTrack?.images[0].url;
-  const TrackName =
-    currentTrack?.album_type === "album"
-      ? currentTrack?.tracks.items[0].name
-      : currentTrack?.name;
-  const TrackArtistName = currentTrack?.artists;
+  // const TrackImg =
+  //   currentTrack?.album?.images[0].url || currentTrack?.images[0].url;
+  // const TrackName =
+  //   currentTrack?.album_type === "album"
+  //     ? currentTrack?.tracks.items[0].name
+  //     : currentTrack?.name;
+  // const TrackArtistName = currentTrack?.artists;
 
-  if (TrackArtistName && TrackName) {
-    dispatch(setTitle(TrackName));
-    dispatch(setName(TrackArtistName[0].name));
-  }
+  // if (TrackArtistName && TrackName) {
+  //   dispatch(setTitle(TrackName));
+  //   dispatch(setName(TrackArtistName[0].name));
+  // }
 
   return (
     <Wrapper>
-      <div className="d-flex align-items-center gap-3">
+      {/* <div className="d-flex align-items-center gap-3">
         {TrackImg ? (
           <Image
             src={TrackImg}
@@ -113,7 +111,7 @@ const Player = () => {
         <h5 style={{ textDecoration: "underline", cursor: "pointer" }}>
           lyrics
         </h5>
-      </div>
+      </div> */}
     </Wrapper>
   );
 };
@@ -136,4 +134,4 @@ const Wrapper = styled.div`
     background: red;
   }
 `;
-export default React.memo(Player);
+export default Player;
