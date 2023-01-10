@@ -18,28 +18,28 @@ const Player = () => {
 
   const { pathname } = useRouter();
 
-  // useEffect(() => {
-  //   if (spotifyApi.getAccessToken() && currentTrackId !== null) {
-  //     async function fetchData() {
-  //       try {
-  //         if (
-  //           pathname === "/playlist/[playlistId]" ||
-  //           pathname === "/album/[albumId]" ||
-  //           pathname === "/artist/[artistId]"
-  //         ) {
-  //           const currentTrack = await spotifyApi?.getTrack(currentTrackId);
-  //           setCurrentTrack(currentTrack.body);
-  //         } else {
-  //           const currentTrack = await spotifyApi?.getAlbum(currentTrackId);
-  //           setCurrentTrack(currentTrack.body);
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //     fetchData();
-  //   }
-  // }, [currentTrackId, spotifyApi, pathname]);
+  useEffect(() => {
+    if (spotifyApi.getAccessToken() && currentTrackId !== null) {
+      async function fetchData() {
+        try {
+          if (
+            pathname === "/playlist/[playlistId]" ||
+            pathname === "/album/[albumId]" ||
+            pathname === "/artist/[artistId]"
+          ) {
+            const currentTrack = await spotifyApi?.getTrack(currentTrackId);
+            setCurrentTrack(currentTrack.body);
+          } else {
+            const currentTrack = await spotifyApi?.getAlbum(currentTrackId);
+            setCurrentTrack(currentTrack.body);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchData();
+    }
+  }, [currentTrackId, spotifyApi, pathname]);
 
   const getLyrics = async (TrackName, TrackArtistName) => {
     const res = await axios.get("/api/lyrics", {
@@ -67,10 +67,12 @@ const Player = () => {
       : currentTrack?.name;
   const TrackArtistName = currentTrack?.artists;
 
-  if (TrackArtistName && TrackName) {
-    dispatch(setTitle(TrackName));
-    dispatch(setName(TrackArtistName[0].name));
-  }
+  useEffect(() => {
+    if (TrackArtistName && TrackName) {
+      dispatch(setTitle(TrackName));
+      dispatch(setName(TrackArtistName[0].name));
+    }
+  }, [TrackArtistName, TrackName, dispatch]);
 
   return (
     <Wrapper>
