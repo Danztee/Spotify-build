@@ -16,7 +16,8 @@ const Play = ({ style, className, size, id, uri, trackId }) => {
 
     if (
       pathname === "/playlist/[playlistId]" ||
-      pathname === "/album/[albumId]"
+      pathname === "/album/[albumId]" ||
+      pathname === "/artist/[artistId]"
     ) {
       dispatch(addCurrentTrack(trackId));
     } else {

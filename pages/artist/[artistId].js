@@ -45,6 +45,10 @@ const ArtistId = () => {
 
   useBackgroundPicker(background);
 
+  if (topTracks !== undefined) {
+    console.log();
+  }
+
   return (
     <>
       {artist && (
@@ -57,7 +61,10 @@ const ArtistId = () => {
 
           <aside id="aside">
             <div className="playMore">
-              <Play size={30} />
+              <Play
+                size={30}
+                trackId={topTracks !== undefined ? topTracks[0].id : ""}
+              />
 
               <div className="more">
                 <SidebarSVG

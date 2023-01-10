@@ -26,7 +26,8 @@ const Player = () => {
         try {
           if (
             pathname === "/playlist/[playlistId]" ||
-            pathname === "/album/[albumId]"
+            pathname === "/album/[albumId]" ||
+            pathname === "/artist/[artistId]"
           ) {
             const currentTrack = await spotifyApi.getTrack(currentTrackId);
             setCurrentTrack(currentTrack.body);
@@ -49,6 +50,7 @@ const Player = () => {
         title: TrackName,
       },
     });
+
     const lyrics = res.data.lyrics;
     if (!lyrics) return;
     dispatch(setLyrics(lyrics));

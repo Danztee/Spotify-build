@@ -21,8 +21,6 @@ const Wrapper = styled.div`
   border-radius: 10px;
   padding-bottom: 2rem;
 
-  /* height: 19rem; */
-
   @media screen and (min-width: 992px) {
     width: ${(props) => props.width};
   }
@@ -34,7 +32,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: end;
 
-    right: 1rem;
+    right: 1.5rem;
     margin-top: 8.5rem;
   }
 

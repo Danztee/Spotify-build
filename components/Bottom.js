@@ -17,7 +17,6 @@ const Bottom = ({ id, topTracks, albumTracks, type, order }) => {
   const handleOut = (e) => {
     setHover(false);
   };
-  // console.log(albumTracks);
 
   if (type === "album") {
     return (
@@ -80,7 +79,7 @@ const Bottom = ({ id, topTracks, albumTracks, type, order }) => {
         <ul className="songs">
           <li className="song">
             {hover ? (
-              <Play className="playBtn" size={"18"} />
+              <Play className="playBtn" size={"18"} trackId={topTracks.id} />
             ) : (
               <p>{order + 1}</p>
             )}
