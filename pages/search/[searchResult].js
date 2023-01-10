@@ -29,12 +29,8 @@ const SearchResult = () => {
     setHover(false);
   };
 
-  function handleHover2(e) {
-    // console.log(e.currentTarget);
-    // console.log(this);
-    // // setHover2(true);
-    // this.setHover2(true);
-  }
+  function handleHover2(e) {}
+
   const handleOut2 = () => {
     setHover2(false);
   };
@@ -78,7 +74,7 @@ const SearchResult = () => {
         </div>
       ) : (
         <Wrapper className="row mt-3">
-          <aside className="col-sm-12 col-md-6 ">
+          <aside className="col-sm-12 col-md-6">
             <h5>Top results</h5>
             <div
               className="artist mt-4 cardCover"

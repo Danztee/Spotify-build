@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import useSpotify from "../hooks/useSpotify";
-import { setLyrics } from "../slices/lyricsSlice";
+import { setLyrics, setTitle, setName } from "../slices/lyricsSlice";
 
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -69,6 +69,11 @@ const Player = () => {
       : currentTrack?.name;
   const TrackArtistName = currentTrack?.artists;
 
+  if (TrackArtistName && TrackName) {
+    dispatch(setTitle(TrackName));
+    dispatch(setName(TrackArtistName[0].name));
+  }
+
   return (
     <Wrapper>
       <div className="d-flex align-items-center gap-3">
@@ -106,7 +111,7 @@ const Player = () => {
 
       <div onClick={lyricsHandler}>
         <h5 style={{ textDecoration: "underline", cursor: "pointer" }}>
-          view lyrics
+          lyrics
         </h5>
       </div>
     </Wrapper>
