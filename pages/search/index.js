@@ -48,7 +48,6 @@ const Search = () => {
                   radius="50%"
                   role="artist"
                   width="230px"
-                  style={{ height: "18rem" }}
                 />
               );
             })}
