@@ -14,8 +14,14 @@ body {
   line-height: 1.6;
   color: #b3b3b3;
   font-family: "Space Grotesk", sans-serif;
-  font-size: 15px;
+  font-size: 12px;
   background-color: #121212;
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    font-size: 15px;
+  }
 }
 
 #spotify {
@@ -84,8 +90,11 @@ a {
 }
 
 .none {
-  position: absolute;
+  /* position: absolute; */
   bottom: 4.1rem;
+
+  position: fixed;
+  z-index: 999999;
 }
 
 @media screen and (min-width: 992px) {
