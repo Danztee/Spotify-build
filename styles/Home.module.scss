@@ -13,13 +13,14 @@
   z-index: 1;
 
   background: transparent;
-  padding: 1rem 0;
+  padding: 0.7rem 0;
   top: 0;
   left: 0;
   // backdrop-filter: brightness(0.5);
 
   @media screen and (min-width: 992px) {
     left: 17.8%;
+    padding: 1rem 0;
   }
 }
 
