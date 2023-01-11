@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const FooterLinks = () => {
   return (
-    <Wrapper>
+    <Wrapper className="d-none d-lg-flex">
       <div className="links">
         <Link href="/">legal</Link>
         <Link href="/">privacy center</Link>

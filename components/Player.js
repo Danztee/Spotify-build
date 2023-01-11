@@ -130,7 +130,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 100vw;
 
-  @media screen and (max-width: 992px) {
+  @media screen and (min-width: 992px) {
     padding: 1rem;
   }
 
@@ -139,7 +139,7 @@ const Wrapper = styled.div`
     height: 45px;
     width: 48px;
 
-    @media screen and (max-width: 992px) {
+    @media screen and (min-width: 992px) {
       height: 55px;
       width: 55px;
     }

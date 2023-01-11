@@ -15,7 +15,7 @@ const Hero = ({
   // duration,
 }) => {
   return (
-    <Wrapper className="mt-5" type={type}>
+    <Wrapper type={type}>
       <aside className="pic">
         <Image src={image} height="250" width="250" alt={name} unoptimized />
       </aside>
@@ -57,6 +57,7 @@ const Wrapper = styled.section`
     flex-direction: row;
     align-items: center;
     gap: 2rem;
+    margin-top: 3rem;
   }
 
   .pic {
