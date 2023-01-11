@@ -122,7 +122,7 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 99999999;
 
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
 
   background-color: #2a2a2a;
   display: flex;
@@ -130,10 +130,19 @@ const Wrapper = styled.div`
   justify-content: space-between;
   width: 100vw;
 
+  @media screen and (max-width: 992px) {
+    padding: 1rem;
+  }
+
   .img {
-    height: 55px;
-    width: 55px;
     background: red;
+    height: 45px;
+    width: 48px;
+
+    @media screen and (max-width: 992px) {
+      height: 55px;
+      width: 55px;
+    }
   }
 `;
 export default Player;
