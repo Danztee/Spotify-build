@@ -44,6 +44,7 @@ const Wrapper = styled.div`
   .track {
     text-align: center;
     margin-bottom: 2rem;
+    position: relative;
 
     p {
       font-size: 11px;
